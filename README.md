@@ -19,6 +19,7 @@ Use **npm** to install the necessary  modules:
 ## Let's Start the bot
 
 Go to **app.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
+
 Use **node idlebot.js** to start your bot 
 
 That's it! your Bot is Making Hours... ;D
