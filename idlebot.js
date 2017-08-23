@@ -89,7 +89,24 @@ client.on('friendMessage', function(Steam,message){
 
 //errors
 client.on("error", function(err) {
-  log(err);
+  //log("[STEAM] Login Failed on Client.");    
+  //log(err);
+    //verify connection and accounts, 1 account per Idle(protection)
+    if (err.eresult == Steam.EResult.InvalidPassword)
+    {
+        log("[STEAM] Login Failed, Password.");
+        shutdown();
+    }
+    else if (err.eresult == Steam.EResult.AlreadyLoggedInElsewhere)
+    {
+        log("[STEAM] Already logged in!");
+        shutdown();
+    }
+    else if (err.eresult == Steam.EResult.AccountLogonDenied)
+    {
+        log("[STEAM] Login Denied - SteamGuard required");
+        shutdown();
+    }
 });
 
 
