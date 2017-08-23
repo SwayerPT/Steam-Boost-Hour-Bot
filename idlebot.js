@@ -1,13 +1,13 @@
 /*
-    Community: Flow Community
-    Community TeamSpeak: flowcm.ddns.net
+    Project: Steam Hour Bot
+    Flow Community TeamSpeak: flowcm.ddns.net
     Created by Swayer
     
     version.1.3
 
 */
 
-//var system
+///////////////////////////////Variables
 var Steam = require('steam-user'), fs = require('fs'), readlineSync = require('readline-sync');
 var client = new Steam();
 var settings = require('./config.json');
@@ -18,7 +18,9 @@ var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
 var afk = "I'm out. Script created by Swayer";
 
-// Looping function
+
+///////////////////////////////Looping function
+
 var forallArray = function(array) {
   for (var i = array.Length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -28,6 +30,8 @@ var forallArray = function(array) {
   }
   return array;
 }
+
+///////////////////////////////Message Setts
 
 function log(message) {
 	var date = new Date();
@@ -49,7 +53,8 @@ client.on("connected", function() {
 
 
 
-//login process
+///////////////////////////////login process
+
 client.logOn({
   accountName: settings.username,
   password: settings.password,
@@ -64,7 +69,7 @@ client.on("loggedOn", function() {
 });
 
 
-//logs file
+///////////////////////////////logs file
 
 if (!fs.existsSync("./log/"))
 {
@@ -87,11 +92,14 @@ client.on('friendMessage', function(Steam,message){
 		log("[MESSAGE] sent to " + Steam.getSteam3RenderedID());
 });
 
-//errors
+
+
+///////////////////////////////errors
+
 client.on("error", function(err) {
   //log("[STEAM] Login Failed on Client.");    
   //log(err);
-    //verify connection and accounts, 1 account per Idle(protection)
+    
     if (err.eresult == Steam.EResult.InvalidPassword)
     {
         log("[STEAM] Login Failed, Password.");
@@ -107,11 +115,12 @@ client.on("error", function(err) {
         log("[STEAM] Login Denied - SteamGuard required");
         shutdown();
     }
+    
 });
 
 
+///////////////////////////////shutdown process
 
-//shutdown process
 process.on('SIGINT', function() {
 	log("[STEAM] Logging off...");
 	shutdown();
