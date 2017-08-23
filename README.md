@@ -11,10 +11,15 @@ Install the NodeJs from https://nodejs.org/en/
 Open your **CMD Prompt**
 
 Use **npm** to install the necessary  modules:
- npm install steam-user
- npm install fs
- npm install readline-sync
- npm install request
+
+npm install steam-user
+
+npm install fs
+
+npm install readline-sync
+
+npm install request
+
 
 ## Let's Start the bot
 
