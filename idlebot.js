@@ -16,7 +16,6 @@ var mobileCode = readlineSync.question("[STEAM GUARD] Steam App Code: ");
 var wstream;
 var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
-var afk = "I'm out. Script created by Swayer";
 
 
 ///////////////////////////////Looping function
@@ -88,7 +87,7 @@ client.on('friendMessage', function(Steam,message){
 		var utcDate = dtiming.toUTCString();
 		log("[MESSAGE] New message: " + Steam.getSteam3RenderedID() + ": " +  message);
 		wstream.write("[MESSAGE] New message: " + Steam.getSteam3RenderedID() + ": " +  message);
-		client.chatMessage(Steam, afk);
+		client.chatMessage(Steam, settings.afk);
 		log("[MESSAGE] sent to " + Steam.getSteam3RenderedID());
 });
 
