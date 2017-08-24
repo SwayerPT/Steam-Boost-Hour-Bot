@@ -34,6 +34,7 @@ Coming Soon
 
 
 
+
 That's it! your Bot is idling... ;D
 
 Note: There is a game idle limit to Boost your account. Max **30** Games.
