@@ -27,7 +27,14 @@ Go to **app.json** and change the **username** and the **passowrd**, then you ne
 
 Use **node idlebot.js** to start your bot 
 
-That's it! your Bot is Making Hours... ;D
+
+## Trade System
+
+Coming Soon
+
+
+
+That's it! your Bot is idling... ;D
 
 Note: There is a game idle limit to Boost your account. Max **30** Games.
 
