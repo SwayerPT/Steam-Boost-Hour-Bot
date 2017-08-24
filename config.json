@@ -6,8 +6,8 @@
 */
 
 {
-  "username": "STEAMUSER",
-  "password": "STEAMPW",
+  //"username": "STEAMUSER",
+  //"password": "STEAMPW",
   "afk": "I'm out. Script created by Swayer",    
   "games": [730, XXX, XXX, XXX]
 }
