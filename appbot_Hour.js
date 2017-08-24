@@ -11,6 +11,8 @@
 var Steam = require('steam-user'), fs = require('fs'), readlineSync = require('readline-sync');
 var client = new Steam();
 var settings = require('./config.json');
+var username = readlineSync.question("[SECURITY] Steam Username: ");
+var password = readlineSync.question("[SECURITY] Steam Password: ");
 var mobileCode = readlineSync.question("[STEAM GUARD] Steam App Code: ");
 
 var wstream;
@@ -55,8 +57,8 @@ client.on("connected", function() {
 ///////////////////////////////login process
 
 client.logOn({
-  accountName: settings.username,
-  password: settings.password,
+  accountName: username,
+  password: password,
   twoFactorCode: mobileCode  
 });
 
