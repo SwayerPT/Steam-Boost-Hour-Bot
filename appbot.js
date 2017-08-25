@@ -43,8 +43,8 @@ client.logOn({
 });
 
 client.on("loggedOn", function() {
-  log("Initializing Steam Client..");
   client.setPersona(Steam.EPersonaState.Online);
+  log("Logged on Steam Client as " + settings.username +".");    	
   client.gamesPlayed(forallArray(settings.games));
   games(settings.games);     
 });
