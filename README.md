@@ -37,7 +37,7 @@ Use **node idlebot.js** to start your bot
   <img  src="http://i.imgur.com/5AZIs21.png" />
 </h1>
 <h1 align="center">
-  <img  src="http://i.imgur.com/qwPry93.png" />
+  <img  src="http://i.imgur.com/Zup2iSi.png" />
 </h1>
 
 That's it!
