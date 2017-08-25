@@ -14,7 +14,7 @@ var settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
 var username = readlineSync.question("[ACCOUNT] Steam Username: ");
-var password = readlineSync.question("[ACCOUNT] Steam Password: ");
+var password = readlineSync.question('[ACCOUNT] Steam Password: ', {hideEchoBack: true});
 var mobileCode = readlineSync.question("[STEAM GUARD] Steam App Code: ");
 
 var wstream;
