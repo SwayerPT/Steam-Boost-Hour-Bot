@@ -39,7 +39,7 @@ Use **node idlebot.js** to start your bot
 
 That's it!
 
-Note: There is a game idle limit to Boost your account. Max **30** Games.
+Note: There is a game limit to Boost your account. Max **30** Games, but i recommend **25** games.
 
 ## Donations: 
 https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
