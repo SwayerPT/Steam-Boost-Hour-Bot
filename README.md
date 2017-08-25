@@ -4,7 +4,7 @@
   Steam Hour Bot
 </h1>
 
-<p align="center">**Open Script for Community**
+<p align="center"><br>Open Script for Community</br>
 
 This project is in progress at the moment.
 the script give to you **Hours** in a lot of games and in the Future creating something like **Card Dropping,** using **HTML Forms**.
