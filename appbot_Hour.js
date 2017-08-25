@@ -82,17 +82,18 @@ else
 	wstream = fs.createWriteStream(process.cwd() + "\\log\\" + tstamp + '.log');
 }
 
-//reply friends system
-client.on('friendMessage', function(Steam,message){
-
-		var dtiming = new Date();
-		var utcDate = dtiming.toUTCString();
-		log("[MESSAGE] New message: " + Steam.getSteam3RenderedID() + ": " +  message);
-		wstream.write("[MESSAGE] New message: " + Steam.getSteam3RenderedID() + ": " +  message);
-		client.chatMessage(Steam, settings.afk);
-		log("[MESSAGE] sent to " + Steam.getSteam3RenderedID());
+//friend replys
+client.on("friendMessage", function(steamID, message) {
+    if (message == "hello") {
+        client.chatMessage(steamID, "Hi! I'm here at the moment...");
+    }
+    if (message == "play") {
+        client.chatMessage(steamID, "Hey! Can we play later?");
+    }  
+    if (message == "yes") {
+        client.chatMessage(steamID, "Thank you! See you soon.");
+    } 	
 });
-
 
 
 ///////////////////////////////errors
