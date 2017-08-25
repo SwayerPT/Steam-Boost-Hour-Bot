@@ -3,8 +3,7 @@
     Flow Community TeamSpeak: flowcm.ddns.net
     Created by Swayer
     
-    version.1.3
-
+    version.1.3.1
 */
 
 ///////////////////////////////Variables
@@ -16,7 +15,7 @@ var client = new Steam();
 var settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
-console.log(chalk.black.bold.bgWhite('    Steam Account    '));
+console.log(chalk.black.bold.bgWhite('    Steam Account        '));
 var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
 var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
 var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Auth Code ') + ': ');
@@ -53,6 +52,15 @@ client.on("loggedOn", function() {
   games(settings.games);     
 });
 
+// servers list
+if (fs.existsSync('servers')) {
+  Steam.servers = JSON.parse(fs.readFileSync('servers'));
+  log("Connecting to the Servers.");    
+}
+
+client.on("connected", function() {
+  log("Initializing Servers.");
+});
 
 ///////////////////////////////logs file
 
@@ -114,7 +122,7 @@ process.on('SIGINT', function() {
 
 
 ////////////////////////////FUNCTIONS
-
+console.log(chalk.black.bold.bgWhite('    Connection Status    '));
 function log(message) {
 	var date = new Date();
 	var time = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
@@ -124,14 +132,8 @@ function log(message) {
 			time[i] = '0' + time[i];
 		}
 	}
-	
 	console.log(' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - \x1b[36m%s\x1b[0m', '[STEAM] ' + message);
 }
-
-
-client.on("connected", function() {
-  log("Initializing Servers.");
-});
 
 function games() {
     
