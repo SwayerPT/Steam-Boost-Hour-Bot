@@ -5,9 +5,9 @@
 </h1>
 ### Open Script for Community
 
-This project is in progress at the moment.
+<p align="center">This project is in progress at the moment.
 the script give to you **Hours** in a lot of games and in the Future creating something like **Card Dropping,** using **HTML Forms**.
-I know that already exists a lot of scripts for idle.. But i wanna be different and create my own scripts.
+I know that already exists a lot of scripts for idle.. But i wanna be different and create my own scripts.</p>
 
 ## Let's Beggin
 
