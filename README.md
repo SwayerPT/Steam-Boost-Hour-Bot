@@ -25,6 +25,7 @@ npm install readline-sync
 
 npm install request
 
+npm install chalk
 
 ## Let's Start the bot
 Note: the **config.json** file was changed, now you don't need to enter your username or password. Only on the CMD.. Easy way to move or save files.
