@@ -6,9 +6,9 @@
 
 <p align="center"><br>Open Script for Community</br>
 
-This project is in progress at the moment.
-the script give to you **Hours** in a lot of games and in the Future creating something like **Card Dropping,** using **HTML Forms**.
-I know that already exists a lot of scripts for idle.. But i wanna be different and create my own scripts.</p>
+This project is running by community. This script give to you **Hours** in all the games that you select in the config.json
+There is a lot of scripts like this one in our Community, the main goal is open this script to the Community. Everybody is free to edit and change with new things.
+</p>
 
 ## Let's Beggin
 
