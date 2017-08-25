@@ -8,14 +8,18 @@
 */
 
 ///////////////////////////////Variables
-var Steam = require('steam-user'), fs = require('fs'), readlineSync = require('readline-sync');
+var Steam = require('steam-user'), 
+    fs = require('fs'), 
+    readlineSync = require('readline-sync'), 
+    chalk = require('chalk');
 var client = new Steam();
 var settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
-var username = readlineSync.question("[ACCOUNT] Steam Username: ");
-var password = readlineSync.question('[ACCOUNT] Steam Password: ', {hideEchoBack: true});
-var mobileCode = readlineSync.question("[STEAM GUARD] Steam App Code: ");
+console.log(chalk.black.bold.bgWhite('    Steam Account    '));
+var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
+var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
+var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Auth Code ') + ': ');
 
 var wstream;
 var dtiming = new Date();
