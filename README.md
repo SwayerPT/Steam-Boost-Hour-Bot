@@ -6,8 +6,8 @@
 
 <p align="center"><br>Open Script for Community</br>
 
-This project is running by community. This script give to you **Hours** in all the games that you select in the config.json
-There is a lot of scripts like this one in our Community, the main goal is open this script to the Community. Everybody is free to edit and change with new things.
+This project is running by me. Give to you **Hours** in all the games that you select in the config.json
+There is a lot of scripts like this one in our Community, the main goal is open this script to the Community. Everybody is free to edit and change with new things. The script is also open to the community to edit and add new improvements.
 </p>
 
 ## Let's Beggin
