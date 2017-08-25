@@ -27,8 +27,9 @@ npm install request
 
 
 ## Let's Start the bot
+Note: the **config.json** file is changed, now you don't need to enter your username or password. Only on the CMD.. Easy way to move or save files.
 
-Go to **config.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
+- Go to **config.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
 
 Use **node idlebot.js** to start your bot 
 
