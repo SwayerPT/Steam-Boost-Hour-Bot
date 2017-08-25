@@ -1,4 +1,8 @@
-# Steam Idle Booster
+<h1 align="center">
+  <img  src="http://i.imgur.com/tq28TqF.png" height="80" width="80" />
+  <br/>
+  Steam Hour Bot
+</h1>
 ### Open Script for Community
 
 This project is in progress at the moment.
