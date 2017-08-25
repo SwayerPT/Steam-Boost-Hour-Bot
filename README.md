@@ -39,4 +39,5 @@ That's it! your Bot is idling... ;D
 
 Note: There is a game idle limit to Boost your account. Max **30** Games.
 
-## Donations: https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
+## Donations: 
+https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
