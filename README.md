@@ -28,7 +28,7 @@ Go to **config.json** and change the **username** and the **passowrd**, then you
 Use **node idlebot.js** to start your bot 
 
 <h1 align="center">
-  <img  src="http://i.imgur.com/74yFuVx.png" height="64" width="64" />
+  <img  src="http://i.imgur.com/74yFuVx.png" />
 </h1>
 
 That's it!
