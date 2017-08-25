@@ -125,7 +125,7 @@ function log(message) {
 		}
 	}
 	
-	console.log(time[0] + '-' + time[1] + '-' + time[2] + ' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - [STEAM] ' + message);
+	console.log(' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - \x1b[36m%s\x1b[0m', '[STEAM] ' + message);
 }
 
 
