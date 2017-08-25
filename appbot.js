@@ -11,8 +11,10 @@
 var Steam = require('steam-user'), fs = require('fs'), readlineSync = require('readline-sync');
 var client = new Steam();
 var settings = require('./config.json');
-var username = readlineSync.question("[SECURITY] Steam Username: ");
-var password = readlineSync.question("[SECURITY] Steam Password: ");
+
+//This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
+var username = readlineSync.question("[ACCOUNT] Steam Username: ");
+var password = readlineSync.question("[ACCOUNT] Steam Password: ");
 var mobileCode = readlineSync.question("[STEAM GUARD] Steam App Code: ");
 
 var wstream;
