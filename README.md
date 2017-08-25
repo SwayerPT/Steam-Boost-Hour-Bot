@@ -23,7 +23,7 @@ npm install request
 
 ## Let's Start the bot
 
-Go to **app.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
+Go to **config.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
 
 Use **node idlebot.js** to start your bot 
 
