@@ -32,28 +32,6 @@ var forallArray = function(array) {
   return array;
 }
 
-///////////////////////////////Message Setts
-
-function log(message) {
-	var date = new Date();
-	var time = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
-	
-	for(var i = 1; i < 6; i++) {
-		if(time[i] < 10) {
-			time[i] = '0' + time[i];
-		}
-	}
-	
-	console.log(time[0] + '-' + time[1] + '-' + time[2] + ' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - ' + message);
-}
-
-
-client.on("connected", function() {
-  log("[STEAM] Initializing Servers.");
-});
-
-
-
 ///////////////////////////////login process
 
 client.logOn({
@@ -63,7 +41,7 @@ client.logOn({
 });
 
 client.on("loggedOn", function() {
-  log("[STEAM] Initializing Steam Client..");
+  log("Initializing Steam Client..");
   client.setPersona(Steam.EPersonaState.Online);
   client.gamesPlayed(forallArray(settings.games));
   games(settings.games);     
@@ -104,17 +82,17 @@ client.on("error", function(err) {
     
     if (err.eresult == Steam.EResult.InvalidPassword)
     {
-        log("[STEAM] Login Failed, Password.");
+        log("Login Failed, Password.");
         shutdown();
     }
     else if (err.eresult == Steam.EResult.AlreadyLoggedInElsewhere)
     {
-        log("[STEAM] Already logged in!");
+        log("Already logged in!");
         shutdown();
     }
     else if (err.eresult == Steam.EResult.AccountLogonDenied)
     {
-        log("[STEAM] Login Denied - SteamGuard required");
+        log("Login Denied - SteamGuard required");
         shutdown();
     }
     
@@ -124,20 +102,41 @@ client.on("error", function(err) {
 ///////////////////////////////shutdown process
 
 process.on('SIGINT', function() {
-	log("[STEAM] Logging off...");
+	log("Logging off...");
 	shutdown();
+});
+
+
+////////////////////////////FUNCTIONS
+
+function log(message) {
+	var date = new Date();
+	var time = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+	
+	for(var i = 1; i < 6; i++) {
+		if(time[i] < 10) {
+			time[i] = '0' + time[i];
+		}
+	}
+	
+	console.log(time[0] + '-' + time[1] + '-' + time[2] + ' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - [STEAM] ' + message);
+}
+
+
+client.on("connected", function() {
+  log("Initializing Servers.");
 });
 
 function games() {
     
 	if(settings.games.length < 30)
 		{
-            log("[STEAM] Initializing " + settings.games.length + " Games...");             
+            log("Initializing " + settings.games.length + " Games...");             
         
         } else {
             
-            log("[STEAM] Exceeded the limit " + settings.games.length + " of 30 Games...");
-	        log("[STEAM] Logging off...");           
+            log("Exceeded the limit " + settings.games.length + " of 30 Games...");
+	        log("Logging off...");           
 			client.logOff();
 	        shutdown();                   
         }    
