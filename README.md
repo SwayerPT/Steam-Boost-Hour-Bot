@@ -27,15 +27,11 @@ Go to **config.json** and change the **username** and the **passowrd**, then you
 
 Use **node idlebot.js** to start your bot 
 
+<h1 align="center">
+  <img  src="http://imgur.com/74yFuVx" height="64" width="64" />
+</h1>
 
-## Trade System
-
-Coming Soon
-
-
-
-
-That's it! your Bot is idling... ;D
+That's it!
 
 Note: There is a game idle limit to Boost your account. Max **30** Games.
 
