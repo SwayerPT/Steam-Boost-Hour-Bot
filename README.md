@@ -10,6 +10,19 @@ This project is running by me. Give to you **Hours** in all the games that you s
 There is a lot of scripts like this one in our Community, the main goal is open this script to the Community. The script is also open to the community to edit and add new improvements. Everyone is welcome.
 </p>
 
+## Simple Questions
+
+**Can i get Vac Ban or is a Cheat?**
+- No, this bot is used with **Steam Modules**, it's the same as **Steam App** for your Windows.
+
+**Is this Bot saving Information about my Account?**
+- No, You only enter your **Username** as **Password** into the Console Prompt, this details are secure, and nobody can get them.
+- You can chose where to save, in **config.json** file your details, or use the **prompt** to put them everyday. (for me is better prompt)
+
+**Have your or the Community Access?**
+- No, this Bot is running in your **Localhost** (your pc).
+
+
 ## Let's Beggin
 
 Install the NodeJs from https://nodejs.org/en/
