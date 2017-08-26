@@ -8,6 +8,6 @@
 {
   //"username": "STEAMUSER",
   //"password": "STEAMPW",
-  //"afk": "I'm out. Script created by Swayer",    
+  "acceptRandomFriendRequests": true,  
   "games": [730, XXX, XXX, XXX]
 }
