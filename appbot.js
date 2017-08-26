@@ -15,9 +15,10 @@ var client = new Steam();
 var settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
+//if u close "//" username & password, you can add into config.json both to REMEMBER, otherwise.. insert all the time.
 console.log(chalk.black.bold.bgWhite('    Steam Account        '));
-//var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
-//var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
+var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
+var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
 var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Auth Code ') + ': ');
 
 var wstream;
