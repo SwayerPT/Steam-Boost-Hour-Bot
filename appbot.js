@@ -50,9 +50,6 @@ client.on("loggedOn", function() {
   client.setPersona(Steam.EPersonaState.Away);
   log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
   client.gamesPlayed(forallArray(settings.games));
-  games(settings.games); 
-    
-   
 });
 
 //===============//===============server process//
@@ -67,11 +64,50 @@ if (fs.existsSync('servers')) {
 
 //
 
+//===============//===============limitation process//
+
+client.on('accountLimitations', function (limited, communityBanned) {
+    if (limited) {  
+        if(settings.games.length < 5)
+            {
+                log("This Account is Limited.");
+                log("Initializing " + settings.games.length + " of 5 games...");            
+
+            } else {
+                
+                    log("Exceeded the limit " + settings.games.length + " of 5 Games.");
+                    log("Logging off...");           
+                    client.logOff();
+                    shutdown(); 
+            }      
+        } 
+         else if(settings.games.length < 30)
+        {
+            
+            log("Initializing " + settings.games.length + " of 30 games...");             
+        
+        } else {
+            
+            log("Exceeded the limit " + settings.games.length + " of 30 Games.");
+	        log("Logging off...");           
+			client.logOff();
+	        shutdown();                   
+        }     
+    
+    if (communityBanned){
+        
+        log("Your account is Banned from Steam Community.");
+        log("Logging off...");           
+        client.logOff();
+        shutdown();          
+    }
+});
+
 //===============//===============friend process//
 client.on('friendRelationship', (steamID, relationship) => {
 	if (relationship === 2 && settings.acceptRandomFriendRequests) {        
 		client.addFriend(steamID);
-        log("You added a Friend " + steamID + " recently.");        
+        log(`You added a new Friend ${client.steamID.getSteam3RenderedID()}`);        
 	}
 });
 
