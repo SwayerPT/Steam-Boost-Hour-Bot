@@ -107,7 +107,7 @@ client.on('accountLimitations', function (limited, communityBanned) {
 client.on('friendRelationship', (steamID, relationship) => {
 	if (relationship === 2 && settings.acceptRandomFriendRequests) {        
 		client.addFriend(steamID);
-        log(`You added a new Friend ${client.steamID.getSteam3RenderedID()}`);        
+        	log("You added a new Friend "+steamID);        
 	}
 });
 
