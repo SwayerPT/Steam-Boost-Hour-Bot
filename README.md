@@ -32,7 +32,7 @@ Note: the **config.json** file was changed, now you don't need to enter your use
 
 - Go to **config.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
 
-Use **node idlebot.js** to start your bot 
+Use **node appBot.js** to start your bot 
 <h1 align="center">
   <img  src="http://i.imgur.com/5AZIs21.png" />
 </h1>
