@@ -17,9 +17,9 @@ There is a lot of scripts like this one in our Community, the main goal is open 
 
 **Is this Bot saving Information about my Account?**
 - No, You only enter your **Username** as **Password** into the Console Prompt, this details are secure, and nobody can get them.
-- You can chose where to save, in **config.json** file your details, or use the **prompt** to put them everyday. (for me is better prompt)
+- You can choose where to save, in **config.json** file and fill your details, or use the **prompt** to put them everyday. (for me is better prompt)
 
-**Have your or the Community Access?**
+**Have the Creator or the Community Access?**
 - No, this Bot is running in your **Localhost** (your pc).
 
 
