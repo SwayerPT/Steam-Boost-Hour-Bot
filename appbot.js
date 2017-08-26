@@ -6,7 +6,7 @@
     version.1.3.3
 */
 
-///////////////////////////////Variables
+//===============//===============Variables process//
 var Steam = require('steam-user'), 
     fs = require('fs'), 
     readlineSync = require('readline-sync'), 
@@ -16,8 +16,8 @@ var settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
 console.log(chalk.black.bold.bgWhite('    Steam Account        '));
-var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
-var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
+//var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
+//var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
 var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Auth Code ') + ': ');
 
 var wstream;
@@ -25,7 +25,7 @@ var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
 
 
-///////////////////////////////Looping function
+/*============================================CONTENT=========================================*/
 
 var forallArray = function(array) {
   for (var i = array.Length - 1; i > 0; i--) {
@@ -37,7 +37,7 @@ var forallArray = function(array) {
   return array;
 }
 
-///////////////////////////////login process
+//===============//===============login process//
 
 client.logOn({
   accountName: username,
@@ -50,28 +50,31 @@ client.on("loggedOn", function() {
   log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
   client.gamesPlayed(forallArray(settings.games));
   games(settings.games); 
+    
    
 });
 
-//friend request
+//===============//===============server process//
+if (fs.existsSync('servers')) {
+      Steam.servers = JSON.parse(fs.readFileSync('servers'));
+      log("Connecting to the Servers.");    
+    }
+
+    client.on("connected", function() {
+      log("Initializing Servers.");
+});
+
+//
+
+//===============//===============friend process//
 client.on('friendRelationship', (steamID, relationship) => {
-	if (relationship === 2 && settings.acceptRandomFriendRequests) {
+	if (relationship === 2 && settings.acceptRandomFriendRequests) {        
 		client.addFriend(steamID);
-        log("You added a friend recently.");        
+        log("You added a Friend " + steamID + " recently.");        
 	}
 });
 
-// servers list
-if (fs.existsSync('servers')) {
-  Steam.servers = JSON.parse(fs.readFileSync('servers'));
-  log("Connecting to the Servers.");    
-}
-
-client.on("connected", function() {
-  log("Initializing Servers.");
-});
-
-//friend replys
+//===============//===============reply process//
 client.on("friendMessage", function(steamID, message) {
     if (message == "hello") {
         client.chatMessage(steamID, "Hi! I'm here at the moment...");
@@ -85,7 +88,7 @@ client.on("friendMessage", function(steamID, message) {
 });
 
 
-///////////////////////////////errors
+//===============//===============errors process//
 
 client.on("error", function(err) {
   //log("[STEAM] Login Failed on Client.");    
@@ -110,7 +113,7 @@ client.on("error", function(err) {
 });
 
 
-///////////////////////////////shutdown process
+//===============//===============shutdown process//
 
 process.on('SIGINT', function() {
 	log("Logging off...");
@@ -118,7 +121,8 @@ process.on('SIGINT', function() {
 });
 
 
-////////////////////////////FUNCTIONS
+/*============================================FUNCTIONS=========================================*/
+
 console.log(chalk.black.bold.bgWhite('    Connection Status    '));
 function log(message) {
 	var date = new Date();
