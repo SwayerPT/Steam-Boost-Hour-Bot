@@ -13,7 +13,7 @@ There is a lot of scripts like this one in our Community, the main goal is open 
 ## Simple Questions
 
 **Can i get Vac Ban or is a Cheat?**
-- No, this bot is used with **Steam Modules**, it's the same as **Steam App** for your Windows, the differes is that Simulate the games.
+- No, this bot is used with **Steam Modules**, it's the same as **Steam App** for your Windows, the difference is that Simulate the games.
 
 **Is this Bot saving Information about my Account?**
 - No, You only enter your **Username** as **Password** into the Console Prompt, this details are secure, and nobody can get them.
