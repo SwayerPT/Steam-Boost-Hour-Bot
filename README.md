@@ -33,6 +33,8 @@ Use **npm** to install the necessary  modules:
 
 npm install steam-user
 
+npm install steamcommunity
+
 npm install fs
 
 npm install readline-sync
