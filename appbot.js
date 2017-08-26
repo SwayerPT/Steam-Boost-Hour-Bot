@@ -7,12 +7,13 @@
 */
 
 //===============//===============Variables process//
-var Steam = require('steam-user'), 
-    fs = require('fs'), 
-    readlineSync = require('readline-sync'), 
-    chalk = require('chalk');
-var client = new Steam();
-var settings = require('./config.json');
+const Steam = require('steam-user'), 
+      fs = require('fs'), 
+      readlineSync = require('readline-sync'), 
+      chalk = require('chalk'),
+      SteamCommunity = require('steamcommunity');
+const client = new Steam();
+const settings = require('./config.json');
 
 //This fiels are empty, there is no logs or something else to steal your details. Only entered in the CMD.
 //if u close "//" username & password, you can add into config.json both to REMEMBER, otherwise.. insert all the time.
@@ -103,12 +104,26 @@ client.on('accountLimitations', function (limited, communityBanned) {
     }
 });
 
-//===============//===============friend process//
+//===============//===============friendrequest process//
+
 client.on('friendRelationship', (steamID, relationship) => {
-	if (relationship === 2 && settings.acceptRandomFriendRequests) {        
-		client.addFriend(steamID);
-        	log("You added a new Friend "+steamID);        
+	if (relationship === 2 && settings.acceptRandomFriendRequests) {
+        
+	client.addFriend(steamID);
+        //client.removeFriend(steamID);  
+        client.sendMessage(steamID, "Thank you for Added me. We talk later.");        
+        log(chalk.yellow('You have an invite from '+steamID+'.'));        
 	}
+});
+
+
+//===============//===============Trade Offers process//
+
+
+client.on('tradeOffers', function (number, steamID) {
+    if (number > 0) {
+        log(chalk.green("You received "+ number +" Trade Offer from "+steamID+"."));     
+    }
 });
 
 //===============//===============reply process//
