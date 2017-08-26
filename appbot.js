@@ -46,10 +46,19 @@ client.logOn({
 });
 
 client.on("loggedOn", function() {
-  client.setPersona(Steam.EPersonaState.Online);
-  log("Logged on Steam Client as " + settings.username +".");    	
+  client.setPersona(Steam.EPersonaState.Away);
+  log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
   client.gamesPlayed(forallArray(settings.games));
-  games(settings.games);     
+  games(settings.games); 
+   
+});
+
+//friend request
+client.on('friendRelationship', (steamID, relationship) => {
+	if (relationship === 2 && settings.acceptRandomFriendRequests) {
+		client.addFriend(steamID);
+        log("You added a friend recently.");        
+	}
 });
 
 // servers list
@@ -61,18 +70,6 @@ if (fs.existsSync('servers')) {
 client.on("connected", function() {
   log("Initializing Servers.");
 });
-
-///////////////////////////////logs file
-
-if (!fs.existsSync("./log/"))
-{
-	fs.mkdirSync("./log/");
-	wstream = fs.createWriteStream(process.cwd() + "\\log\\" + tstamp + '.log');
-}
-else
-{
-	wstream = fs.createWriteStream(process.cwd() + "\\log\\" + tstamp + '.log');
-}
 
 //friend replys
 client.on("friendMessage", function(steamID, message) {
