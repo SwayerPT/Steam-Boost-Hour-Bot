@@ -116,6 +116,11 @@ client.on('friendRelationship', (steamID, relationship) => {
 	}
 });
 
+//===============//===============New items//
+
+client.on('newItems', function (count) {
+    log(chalk.green("You received "+ count + " new items in our Inventory."));
+});
 
 //===============//===============Trade Offers process//
 
