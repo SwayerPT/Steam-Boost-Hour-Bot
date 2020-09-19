@@ -111,7 +111,7 @@ client.on('friendRelationship', (steamID, relationship) => {
         
 	client.addFriend(steamID);
         //client.removeFriend(steamID);  
-        client.sendMessage(steamID, "Thank you for Added me. We talk later.");        
+        client.chatMessage(steamID, "Thank you for Added me. We talk later.");        
         log(chalk.yellow('You have an invite from '+steamID+'.'));        
 	}
 });
