@@ -46,7 +46,8 @@ npm install chalk
 ## Let's Start the bot
 Note: the **config.json** file was changed, now you don't need to enter your username or password. Only on the CMD.. Easy way to move or save files.
 
-- Go to **config.json** and change the **username** and the **passowrd**, then you need to enter the game Codes from http://steamcommunity.com/app/730 -> **730** ==  CS:GO
+- To add **new games** go to the appbot.js file on line **"games": [739630]** and change the "739630" with game codes by "739630, 739630, 739630".
+- You can get them from the link when you search a game on market http://steamcommunity.com/app/730 -> **730** ==  CS:GO.
 
 Use **node appBot.js** to start your bot 
 <h1 align="center">
