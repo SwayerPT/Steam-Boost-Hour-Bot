@@ -61,7 +61,5 @@ That's it!
 
 Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will automaticly Bug your Steam Game Hours.
 
-## Donations: 
-https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
-
-**XRP Tokens:** rw2ciyaNshpHe7bCHo4bRWq6pqqynnWKQg
+## Questions? Fell free!: 
+https://steamcommunity.com/id/swayerpt/
