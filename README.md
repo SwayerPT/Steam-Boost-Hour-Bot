@@ -12,12 +12,12 @@ There is a lot of scripts like this one in our Community, the main goal is open 
 
 ## Simple Questions
 
-**Can i get Vac Ban or is a Cheat?**
+**Do i get VacBan or is a Cheat?**
 - No, this bot is used with **Steam Modules**, it's the same as **Steam App** for your Windows, the difference is that Simulate the games.
 
 **Is this Bot saving Information about my Account?**
-- No, You only enter your **Username** as **Password** into the Console Prompt, this details are secure, and nobody can get them.
-- You can choose where to save, in **config.json** file and fill your details, or use the **prompt** to put them everyday. (for me is better prompt)
+- No, You can only enter your **Username** and **Password** into the Console Prompt, this details are secure, and nobody can get them.
+- Yes, Or you can choose where to save, in const **settings** (Remove // on **Username/Password Array** and add **// on Username/Password Const**) and fill your details, (for me is better prompt)
 
 **Have the Creator or the Community Access?**
 - No, this Bot is running in your **Localhost** (your pc).
