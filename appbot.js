@@ -129,16 +129,19 @@ client.on('friendRelationship', (steamID, relationship) => {
 //=============== ITEMS NOTIFY  ===============//
 
 client.on('newItems', function (count) {
-    log(chalk.green("You received "+ count + " new items in our Inventory."));
+    if(count > 0) {
+      log(chalk.green("You received ("+ count + ") items in our Inventory."));  
+    }
 });
 
 //=============== TRADES NOTIFY  ===============//
 
 client.on('tradeOffers', function (number, steamID) {
     if (number > 0) {
-        log(chalk.green("You received "+ number +" Trade Offer from "+steamID+"."));     
+        log(chalk.green("You received ("+ number +") Trade Offer from "+steamID+"."));     
     }
 });
+
 
 
 //=============== AUTO REPLY  ===============//
