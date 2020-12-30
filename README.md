@@ -1,7 +1,7 @@
 <h1 align="center">
   <img  src="http://i.imgur.com/tq28TqF.png" height="80" width="80" />
   <br/>
-  Steam [Bot Timer]
+  Steam Timer [Bot]
 </h1>
 
 <p align="center"><br>Open Source - Community (Version 1.3.8)</br>
