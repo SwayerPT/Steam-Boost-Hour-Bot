@@ -63,4 +63,4 @@ Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will
 ## Donations: 
 https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
 
-**Bitcoin:** qrhd2rst4x7z36ksvmm733chngrkafqexgfegrmtxj
+**XRP Tokens:** rw2ciyaNshpHe7bCHo4bRWq6pqqynnWKQg
