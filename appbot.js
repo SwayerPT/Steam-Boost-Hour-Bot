@@ -12,7 +12,13 @@ const Steam = require('steam-user'),
       chalk = require('chalk'),
       SteamCommunity = require('steamcommunity');
 const client = new Steam();
-const settings = require('./config.json');
+//const settings = require('./config.json');
+const settings = {
+  //"username": "STEAMUSER",
+  //"password": "STEAMPW",
+  "acceptRandomFriendRequests": false,  
+  "games": [730]
+}
 
 //=============== VARIABLES  ===============//
 
@@ -51,8 +57,13 @@ client.logOn({
 
 client.on("loggedOn", function() {
   client.setPersona(Steam.EPersonaState.Away);
-  log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
-  client.gamesPlayed(forallArray(settings.games));
+    if (username === "" || password === "") {
+        log("Login Denied - Empty fields.");
+        shutdown();        
+    } else {
+        log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
+        client.gamesPlayed(forallArray(settings.games));        
+    }   
 });
 
 //=============== CHECK SERVER AVAILABILITY  ===============//
