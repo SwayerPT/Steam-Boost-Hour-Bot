@@ -4,7 +4,7 @@
   Steam Hour Bot
 </h1>
 
-<p align="center"><br>Open Source - Community (Version 1.3.7)</br>
+<p align="center"><br>Open Source - Community (Version 1.3.8)</br>
 
 This project is running by me. Give to you **Hours** in all the games that you select in the config.json
 There is a lot of scripts like this one in our Community, the main goal is open this script to the Community. The script is also open to the community to edit and add new improvements. Everyone is welcome.
