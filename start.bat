@@ -1,0 +1,2 @@
+node appbot.js
+pause
