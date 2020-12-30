@@ -17,6 +17,9 @@ const settings = {
   //"username": "STEAMUSER",
   //"password": "STEAMPW",
   "acceptRandomFriendRequests": false,  
+  "acceptItemNotify": true,  
+  "acceptTradesNotify": true,  
+  "acceptReplys": false,  
   "games": [739630]
   //"games": [730, 271590]
 }
@@ -129,33 +132,38 @@ client.on('friendRelationship', (steamID, relationship) => {
 //=============== ITEMS NOTIFY  ===============//
 
 client.on('newItems', function (count) {
-    if(count > 0) {
-      log(chalk.green("You received ("+ count + ") items in our Inventory."));  
+    if(settings.acceptItemNotify) {
+      if(count > 0) {
+          log(chalk.green("You received ("+ count + ") items in our Inventory."));  
+      } 
     }
 });
 
 //=============== TRADES NOTIFY  ===============//
 
 client.on('tradeOffers', function (number, steamID) {
-    if (number > 0) {
-        log(chalk.green("You received ("+ number +") Trade Offer from "+steamID+"."));     
-    }
+    if(settings.acceptTradesNotify) {
+        if (number > 0) {
+            log(chalk.green("You received ("+ number +") Trade Offer from "+steamID+"."));     
+        }        
+    }    
 });
-
 
 
 //=============== AUTO REPLY  ===============//
 
 client.on("friendMessage", function(steamID, message) {
-    if (message == "hello") {
-        client.chatMessage(steamID, "Hi! I'm here at the moment...");
-    }
-    if (message == "play") {
-        client.chatMessage(steamID, "Hey! Can we play later?");
-    }  
-    if (message == "yes") {
-        client.chatMessage(steamID, "Thank you! See you soon.");
-    } 	
+    if(settings.acceptReplys) {
+        if (message == "hello") {
+            client.chatMessage(steamID, "Hi! I'm here at the moment...");
+        }
+        if (message == "play") {
+            client.chatMessage(steamID, "Hey! Can we play later?");
+        }  
+        if (message == "yes") {
+            client.chatMessage(steamID, "Thank you! See you soon.");
+        }         
+    }	
 });
 
 
