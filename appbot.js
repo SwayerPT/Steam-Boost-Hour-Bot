@@ -17,7 +17,8 @@ const settings = {
   //"username": "STEAMUSER",
   //"password": "STEAMPW",
   "acceptRandomFriendRequests": false,  
-  "games": [730]
+  "games": [739630]
+  //"games": [730, 271590]
 }
 
 //=============== VARIABLES  ===============//
@@ -57,11 +58,12 @@ client.logOn({
 
 client.on("loggedOn", function() {
   client.setPersona(Steam.EPersonaState.Away);
+
     if (username === "" || password === "") {
-        log("Login Denied - Empty fields.");
+        log((chalk.red("Login Denied - Empty fields.")));
         shutdown();        
     } else {
-        log(`Logged on Steam Client as ${client.steamID.getSteam3RenderedID()}`);
+        log((chalk.green("Logged on Steam Client.")));
         client.gamesPlayed(forallArray(settings.games));        
     }   
 });
@@ -70,11 +72,11 @@ client.on("loggedOn", function() {
 
 if (fs.existsSync('servers')) {
     Steam.servers = JSON.parse(fs.readFileSync('servers'));
-    log("Connecting...");    
+    log((chalk.green("Connecting...")));   
 }
 
 client.on("connected", function() {
-    log("Initializing...");
+    log((chalk.green("Initializing...")));  
 });
 
 //
@@ -84,25 +86,30 @@ client.on("connected", function() {
 client.on('accountLimitations', function (limited, communityBanned) {
     if (limited) {  
         if(settings.games.length < 5) {
-                log("This Account is Limited.");
-                log("Initializing " + settings.games.length + " of 5 games...");            
+                log((chalk.red("This Account is Limited.")));
+                log((chalk.green("Initializing " + settings.games.length + " of 5 Limited Games...")));
             } else {
                 log("Exceeded the limit " + settings.games.length + " of 5 Games.");
-                log("Logging off...");           
+                log((chalk.red("Exceeded the limit " + settings.games.length + " of 5 Limited Games...")));
+                log((chalk.red("Logging off..."))); 
+                
                 client.logOff();
                 shutdown(); 
             }      
         } else if(settings.games.length < 30) {
-            log("Initializing " + settings.games.length + " of 30 games...");             
+            log((chalk.green("Initializing " + settings.games.length + " of 30 Limited Games...")));            
+            
         } else {
-            log("Exceeded the limit " + settings.games.length + " of 30 Games.");
-	        log("Logging off...");           
+            log((chalk.red("Exceeded the limit " + settings.games.length + " of 30 Limited Games...")));
+            log((chalk.red("Logging off...")));  
+            
 			client.logOff();
 	        shutdown();                   
         }     
     if (communityBanned){
-        log("Your account is Banned from Steam Community.");
-        log("Logging off...");           
+        log((chalk.red("Steam Community: Banned"))); 
+        log((chalk.red("Logging off...")));         
+          
         client.logOff();
         shutdown();          
     }
@@ -154,30 +161,28 @@ client.on("friendMessage", function(steamID, message) {
 client.on("error", function(err) {
   //log("[STEAM] Login Failed on Client.");    
   //log(err);
-    
     if (err.eresult == Steam.EResult.InvalidPassword)
     {
-        log("Login Failed, Password.");
+        log((chalk.red("Login Denied - User or Password Wrong."))); 
         shutdown();
     }
     else if (err.eresult == Steam.EResult.AlreadyLoggedInElsewhere)
     {
-        log("Already logged in!");
+        log((chalk.red("Login Denied -  Already logged in!")));         
         shutdown();
     }
     else if (err.eresult == Steam.EResult.AccountLogonDenied)
     {
-        log("Login Denied - SteamGuard required");
+        log((chalk.red("Login Denied - SteamGuard is required")));        
         shutdown();
     }
-    
 });
 
 
 //=============== SHUT DOWN SYS  ===============//
 
 process.on('SIGINT', function() {
-	log("Logging off...");
+    log((chalk.red("Logging off...")));  
 	shutdown();
 });
 
@@ -201,11 +206,12 @@ function log(message) {
 
 function games() {
 	if(settings.games.length < 30) {
-      log("Initializing " + settings.games.length + " Games...");               
+        
+      log((chalk.green("Initializing " + settings.games.length + " Games...")));                       
     } else {
-            
-      log("Exceeded the limit " + settings.games.length + " of 30 Games...");
-	  log("Logging off...");           
+
+      log((chalk.green("Exceeded the limit " + settings.games.length + " of 30 Games...")));         
+      log((chalk.red("Logging off...")));                  
       client.logOff();
 	  shutdown();                   
    }    
