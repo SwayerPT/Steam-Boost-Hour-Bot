@@ -21,12 +21,13 @@ const settings = {
   "acceptTradesNotify": true,  
   "acceptReplys": false,  
   "games": [739630]
-  //"games": [730, 271590]
+  //"games": [739630]
 }
 
 //=============== VARIABLES  ===============//
 
-console.log(chalk.black.bold.bgWhite('    Steam Account        '));
+console.log(chalk.grey.bgBlack('Steam Hour [Bot] - v1.3.8'));
+console.log(chalk.black.bold.bgWhite('      Steam Login        '));
 
 //Hide Username and Password by "//" and Open on Config, if you prefer to use in the CONFIG file.
 var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
@@ -39,7 +40,7 @@ var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
 
 
-//=============== CHECK GAME CODES FROM CONFIG  ===============//
+//=============== COUNT GAMES  ===============//
 
 var forallArray = function(array) {
   for (var i = array.Length - 1; i > 0; i--) {
@@ -67,6 +68,7 @@ client.on("loggedOn", function() {
         shutdown();        
     } else {
         log((chalk.green("Logged on Steam Client.")));
+        log((chalk.yellow("Tip: Use (CTRL + C) to LogOut.")));
         client.gamesPlayed(forallArray(settings.games));        
     }   
 });
@@ -81,8 +83,6 @@ if (fs.existsSync('servers')) {
 client.on("connected", function() {
     log((chalk.green("Initializing...")));  
 });
-
-//
 
 //=============== LIMITATIONS (PREVENT LIMITED ACCOUNTS WITH ONLY 5 GAMES)  ===============//
 
