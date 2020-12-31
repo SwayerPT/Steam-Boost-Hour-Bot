@@ -1,7 +1,7 @@
 /*
     Project: Steam Hour Bot
     Created by Swayer
-    version.1.3.7 (no longer in development).
+    version.1.3.9.
 */
 
 //=============== CONSTRUTORS  ===============//
@@ -14,14 +14,11 @@ const Steam = require('steam-user'),
 const client = new Steam();
 //const settings = require('./config.json');
 const settings = {
-  //"username": "STEAMUSER",
-  //"password": "STEAMPW",
   "acceptRandomFriendRequests": false,  
   "acceptItemNotify": true,  
   "acceptTradesNotify": true,  
   "acceptReplys": false,  
-  "games": [739630]
-  //"games": [739630]
+  "games": [739630] //739630 => Phantasmophobia, 730 => CSGO
 }
 
 //=============== VARIABLES  ===============//
@@ -29,12 +26,9 @@ const settings = {
 console.log(chalk.grey.bgBlack('Steam Hour [Bot] - v1.3.8'));
 console.log(chalk.black.bold.bgWhite('      Steam Login        '));
 
-//Hide Username and Password by "//" and Open on Config, if you prefer to use in the CONFIG file.
 var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
 var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
-
-var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Auth Code ') + ': ');
-
+var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Guard ') + ': ');
 var wstream;
 var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
@@ -42,7 +36,7 @@ var tstamp = Math.floor(Date.now() / 1000);
 
 //=============== COUNT GAMES  ===============//
 
-var forallArray = function(array) {
+var CountGamesUsed = function(array) {
   for (var i = array.Length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
@@ -68,8 +62,8 @@ client.on("loggedOn", function() {
         shutdown();        
     } else {
         log((chalk.green("Logged on Steam Client.")));
-        log((chalk.yellow("Tip: Use (CTRL + C) to LogOut.")));
-        client.gamesPlayed(forallArray(settings.games));        
+        log((chalk.yellow("Tip: Use (CTRL + C) to Log out.")));
+        client.gamesPlayed(CountGamesUsed(settings.games));        
     }   
 });
 
@@ -86,11 +80,12 @@ client.on("connected", function() {
 
 //=============== LIMITATIONS (PREVENT LIMITED ACCOUNTS WITH ONLY 5 GAMES)  ===============//
 
-client.on('accountLimitations', function (limited, communityBanned) {
+client.on('accountLimitations', function (limited, communityBanned, locked) {
+    //account is limited
     if (limited) {  
         if(settings.games.length < 5) {
-                log((chalk.red("This Account is Limited.")));
-                log((chalk.green("Initializing " + settings.games.length + " of 5 Limited Games...")));
+                log((chalk.blue("This Account is Limited.")));
+                log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));
             } else {
                 log("Exceeded the limit " + settings.games.length + " of 5 Games.");
                 log((chalk.red("Exceeded the limit " + settings.games.length + " of 5 Limited Games...")));
@@ -99,23 +94,40 @@ client.on('accountLimitations', function (limited, communityBanned) {
                 client.logOff();
                 shutdown(); 
             }      
-        } else if(settings.games.length < 30) {
-            log((chalk.green("Initializing " + settings.games.length + " of 30 Limited Games...")));            
+    } else if(settings.games.length < 25) {
+                log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));
             
-        } else {
-            log((chalk.red("Exceeded the limit " + settings.games.length + " of 30 Limited Games...")));
+    } else {
+            log((chalk.red("Exceeded the limit " + settings.games.length + " of 25 Limited Games...")));
             log((chalk.red("Logging off...")));  
             
 			client.logOff();
 	        shutdown();                   
-        }     
+    }  
+    //community bann
     if (communityBanned){
-        log((chalk.red("Steam Community: Banned"))); 
-        log((chalk.red("Logging off...")));         
-          
+        log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
+        log((chalk.red("Connection Lost!")));
         client.logOff();
         shutdown();          
     }
+    //locked account
+	if(locked) {
+        log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
+        log((chalk.red("Connection Lost!")));
+        client.logOff();
+        shutdown();  
+	}    
+});
+
+client.on('vacBans', function(numBans, appids) {
+	if(numBans > 0) {
+	   log((chalk.red("Verified ("+ numBans + ") ban" + (numBans == 1 ? '' : 's') + "." + (appids.length == 0 ? '' : " in " + appids.join(', ')) )));
+       log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
+       log((chalk.red("Connection Lost!")));
+       client.logOff();
+       shutdown(); 
+	}
 });
 
 //=============== REQUESTS  ===============//
@@ -155,14 +167,32 @@ client.on('tradeOffers', function (number, steamID) {
 client.on("friendMessage", function(steamID, message) {
     if(settings.acceptReplys) {
         if (message == "hello") {
-            client.chatMessage(steamID, "Hi! I'm here at the moment...");
+            client.chatMessage(steamID, "Yoo, wait a moment. ;D");
         }
         if (message == "play") {
-            client.chatMessage(steamID, "Hey! Can we play later?");
+            client.chatMessage(steamID, "Not now... i'm making missions");
         }  
+        if (message == "Why") {
+            client.chatMessage(steamID, "Because i'm doing something");
+        }
+        if (message == "yo") {
+            client.chatMessage(steamID, "Yoo, wait a moment ;D");
+        }
+        if (message == "Do you want to play?") {
+            client.chatMessage(steamID, "Not now");
+        }
+        if (message == "Whatsup") {
+            client.chatMessage(steamID, "hey");
+        }
+        if (message == "Are you there?") {
+            client.chatMessage(steamID, "Yes, but i'm leaving... bye");
+        }
+        if (message == "...") {
+            client.chatMessage(steamID, "Not now!");
+        } 
         if (message == "yes") {
-            client.chatMessage(steamID, "Thank you! See you soon.");
-        }         
+            client.chatMessage(steamID, "Not now!");
+        }            
     }	
 });
 
@@ -201,6 +231,9 @@ process.on('SIGINT', function() {
 //=============== STATUS ON CONSOLE  ===============//
 
 console.log(chalk.black.bold.bgWhite('    Connection Status    '));
+
+//=============== FUNCTIONS ===============//
+
 function log(message) {
 	var date = new Date();
 	var time = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
@@ -213,22 +246,16 @@ function log(message) {
 	console.log(' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - \x1b[36m%s\x1b[0m', '[STEAM] ' + message);
 }
 
-//=============== GAME CALCS ===============//
-
 function games() {
-	if(settings.games.length < 30) {
-        
-      log((chalk.green("Initializing " + settings.games.length + " Games...")));                       
+	if(settings.games.length < 25) {
+       log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));                     
     } else {
-
-      log((chalk.green("Exceeded the limit " + settings.games.length + " of 30 Games...")));         
-      log((chalk.red("Logging off...")));                  
-      client.logOff();
-	  shutdown();                   
+       log((chalk.green("Exceeded the limit " + settings.games.length + " of 25...")));         
+       log((chalk.red("Logging off...")));                  
+       client.logOff();
+	   shutdown();                   
    }    
 }
-
-//=============== SHUTDOWN FUNCS  ===============//
 
 function shutdown(code) {
 	client.logOff();
