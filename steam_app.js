@@ -22,13 +22,13 @@ const settings = {
 }
 
 //=============== VARIABLES  ===============//
-
-console.log(chalk.grey.bgBlack('Steam Hour [Bot] - v1.3.8'));
+console.log(chalk.black.bold.bgWhite('    Steam Hour [Bot]     '));
+console.log(chalk.gray.underline(' v1.3.8'));
 console.log(chalk.black.bold.bgWhite('      Steam Login        '));
 
-var username = readlineSync.question(chalk.gray.underline(' Username ') + ': ');
-var password = readlineSync.question(chalk.gray.underline(' Password ') + ': ', {hideEchoBack: true});
-var mobileCode = readlineSync.question(chalk.gray.underline(' Steam Guard ') + ': ');
+var username = readlineSync.question(chalk.gray.bold(' Username ') + ': ');
+var password = readlineSync.question(chalk.gray.bold(' Password ') + ': ', {hideEchoBack: true});
+var mobileCode = readlineSync.question(chalk.gray.bold(' Steam Guard ') + ': ');
 var wstream;
 var dtiming = new Date();
 var tstamp = Math.floor(Date.now() / 1000);
@@ -146,7 +146,7 @@ client.on('friendRelationship', (steamID, relationship) => {
 client.on('newItems', function (count) {
     if(settings.acceptItemNotify) {
       if(count > 0) {
-          log(chalk.green("You received ("+ count + ") items in our Inventory."));  
+          log(chalk.green("You received ("+ count + ") items in your Inventory."));  
       } 
     }
 });
