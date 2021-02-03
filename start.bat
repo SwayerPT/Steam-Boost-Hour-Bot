@@ -1,2 +1,2 @@
-node appbot.js
+node steam_app.js
 pause
