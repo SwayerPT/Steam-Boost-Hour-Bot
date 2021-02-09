@@ -26,7 +26,8 @@ There is a lot of scripts like this one in our Community, non-offical and copied
 ## Let's Beggin
 
 Install the NodeJs from https://nodejs.org/en/
-Open your **CMD Prompt**
+
+Open your **CMD Prompt** and install the bellow modules inside the same folder as the bot is.
 
 Use **npm** to install the necessary  modules:
 
