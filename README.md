@@ -31,7 +31,8 @@ Open your **CMD Prompt** and install the bellow modules inside the same folder a
 
 Use **npm** to install the necessary  modules:
 
-Updated**:
+**Updated** 1.4
+
 -- -- npm i chalk@2.4.1
 
 -- -- npm install steam-user
