@@ -68,4 +68,5 @@ Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will
 ## Questions? Fell free!: 
 https://steamcommunity.com/id/swayerpt/
 
-## DONATIONS BY STEAM
+## DONATIONS BY STEAM TRADE
+https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
