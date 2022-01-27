@@ -33,11 +33,17 @@ Use **npm** to install the necessary  modules:
 
 Updated**:
 -- -- npm i chalk@2.4.1
+
 -- -- npm install steam-user
+
 -- -- npm install steamcommunity
+
 -- -- npm install fs
+
 -- -- npm install readline-sync
+
 -- -- npm install request
+
 
 ## Let's Start the bot
 
@@ -61,5 +67,4 @@ Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will
 ## Questions? Fell free!: 
 https://steamcommunity.com/id/swayerpt/
 
-## BTC
-3Bzm3gH5Bumcj2YGjAYcaQNAaFj9EjgoZv
+## DONATIONS BY STEAM
