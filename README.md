@@ -31,17 +31,13 @@ Open your **CMD Prompt** and install the bellow modules inside the same folder a
 
 Use **npm** to install the necessary  modules:
 
-npm install steam-user
-
-npm install steamcommunity
-
-npm install fs
-
-npm install readline-sync
-
-npm install request
-
-npm install chalk
+Updated**:
+-- -- npm i chalk@2.4.1
+-- -- npm install steam-user
+-- -- npm install steamcommunity
+-- -- npm install fs
+-- -- npm install readline-sync
+-- -- npm install request
 
 ## Let's Start the bot
 
