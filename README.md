@@ -4,7 +4,7 @@
   Steam Hour [Bot]
 </h1>
 
-<p align="center"><br>Steam Hour [Bot] Source - Community (<a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Current Version</a>)</br>
+<p align="center"><br>Steam Boost Hour [Bot] Source - Community (<a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Current Version</a>)</br>
 
 This project is running by me(Swayer) with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
 There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is open this script to the Community. Everyone is welcome.
