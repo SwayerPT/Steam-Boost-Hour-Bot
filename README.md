@@ -6,7 +6,7 @@
 
 <p align="center"><br>Steam Hour [Bot] Source - Community (<a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Current Version</a>)</br>
 
-This project is running by me(Swayer) with the aim of getting all the community satisfied giving them **Hours**.
+This project is running by me(Swayer) with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
 There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is open this script to the Community. Everyone is welcome.
 </p>
 
@@ -31,8 +31,6 @@ Open your **CMD Prompt** and install the bellow modules inside the same folder a
 
 Use **npm** to install the necessary  modules:
 
-**Updated** 1.4
-
 -- -- npm i chalk@2.4.1
 
 -- -- npm install steam-user
@@ -48,12 +46,10 @@ Use **npm** to install the necessary  modules:
 
 ## Let's Start the bot
 
-- To add **new games** go to the appbot.js file on line **"games": [739630]** and change the "739630" with game codes by "739630, 739630, 739630".
+- To add **new games** go to the steam_app.js file on line **"games_id": [739630]** and change the "739630" with game codes like "739630, 739630, 739630".
 - You can get them from the link when you search a game on market http://steamcommunity.com/app/730 -> **730** ==  CS:GO.
-(I'm going to change this in the future, a new way to insert them using Console).
 
-
-Use **node appBot.js** to start your bot 
+Use click on **start** to start your bot. 
 <h1 align="center">
   <img  src="http://i.imgur.com/5AZIs21.png" />
 </h1>
