@@ -1,20 +1,23 @@
 {
-  "name": "Steam-Hour-Bot",
-  "version": "1.3.8",
-  "description": "Is a special Bot that idle hours and give to you cards.",
-  "main": "appbot.js",
+  "name": "Steam-Boost-Hour-[Bot]",
+  "version": "1.4.3",
+  "description": "A special bot that can change your entire steam value in Hours and Drops.",
+  "main": "steam_app.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SwayerPT/Steam-Hour-Bot"
+    "url": "git+https://github.com/SwayerPT/Steam-Boost-Hour-Bot"
   },
   "keywords": [
     "steam",
     "idler",
     "hour",
+    "steam bot",
+    "games",
+    "steam games",      
   ],
-  "author": "Swayer",
+  "author": "SwayerPT",
   "license": "GPL",
   "bugs": {
-    "url": "https://github.com/SwayerPT/Steam-Hour-Bot/issues"
+    "url": "https://github.com/SwayerPT/Steam-Boost-Hour-Bot/issues"
   },
 }
