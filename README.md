@@ -25,44 +25,27 @@ There is a lot of scripts like this one in our Community, non-offical and copied
 
 
 ## Let's Beggin
-
-Install the NodeJs from https://nodejs.org/en/
-
-Open your **CMD Prompt** and install the bellow modules inside the same folder as the bot is.
-
-Use **npm** to install the necessary  modules:
-
--- -- npm i chalk@2.4.1
-
--- -- npm install steam-user
-
--- -- npm install steamcommunity
-
--- -- npm install fs
-
--- -- npm install readline-sync
-
--- -- npm install request
-
+- Install the packages using the file "install.bat".
+- After installed, check carefully if everything is updated.
+- Click on "start.bat" to iniciate your bot.
 
 ## Let's Start the bot
-
-- To add **new games** go to the steam_app.js file on line **"games_id": [739630]** and change the "739630" with game codes like "739630, 739630, 739630".
+- To add **new games** insert on CMD called "GamesID (comma-separated)" with game-codes like "739630, 739630, 739630".
 - You can get them from the link when you search a game on market http://steamcommunity.com/app/730 -> **730** ==  CS:GO.
 
 Use click on **start** to start your bot. 
 <h1 align="center">
-  <img  src="http://i.imgur.com/5AZIs21.png" />
+  <img  src="https://i.imgur.com/LH2btmZ.png" />
 </h1>
-<h1 align="center">
-  <img  src="http://i.imgur.com/LrPyrcd.png" />
-</h1>
+
 
 That's it!
 
 Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will automaticly Bug your Steam Game Hours.
 
 ## Questions? Fell free!: 
+By Github issues: <a href='https://github.com/SwayerPT/Steam-Boost-Hour-Bot/issues'>here</a>
+or
 https://steamcommunity.com/id/swayerpt/
 
 ## DONATIONS BY STEAM TRADE
