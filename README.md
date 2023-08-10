@@ -8,7 +8,7 @@
 Download your latest version <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>here</a>
 </br>
 This project is running by me(Swayer) with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
-There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is open this script to the Community. Everyone is welcome.
+There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is to give satisfation to the Community. Everyone is welcome to try or use. No virus, No hacking, Only pure JS.
 </p>
 
 ## Simple Questions
