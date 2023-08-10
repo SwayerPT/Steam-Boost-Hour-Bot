@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center"><br>Steam Boost Hour [Bot] Source - Community</br>
-Download your latest version <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>here</a>
+Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Releases</a>
 </br>
 This project is running by me(Swayer) with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
 There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is to give satisfation to the Community. Everyone is welcome to try or use. No virus, No hacking, Only pure JS.
