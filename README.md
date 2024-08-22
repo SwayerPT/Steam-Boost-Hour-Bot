@@ -33,7 +33,7 @@ There is a lot of scripts like this one in our Community, non-offical and copied
 ## Let's Start the bot
 - To add **new games** insert on CMD called "GamesID (comma-separated)" with game-codes like "739630, 739630, 739630".
 - Login using your credencials securely. *(If vacbanned, choose YES to proceed)*
-- 
+  
 Codes: You can get them from the link when you search a game on market http://steamcommunity.com/app/730 -> **730** ==  CS:GO.
  
 <h1 align="center">
