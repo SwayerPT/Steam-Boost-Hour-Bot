@@ -17,7 +17,8 @@ There is a lot of scripts like this one in our Community, non-offical and copied
 - No, this bot is used with **Steam Modules & NODEJS**, it's the same as **Steam Auth App** for your Windows, but the difference is that Simulate the games.
 
 **Is this Bot saving Information about my Account?**
-- No, You can only enter your **Username** and **Password** into the Console Prompt, this details are secure, and nobody can get them. (Session Mode)(this app will never save your credendials or ask anything related to steal you. My goal is to help you and to make it simple and secure.).
+- No, You can only enter your **Username** and **Password** into the Console Prompt, this details are secure, and nobody can get them. (Session Mode)
+  (this app will never save your credendials or ask anything related to steal you. My goal is to help you and to make it simple and secure.).
 
 **Have the Creator or the Community Access?**
 - No, this Bot is running in your **Localhost** (your pc) and your details cannot be Tracked.
