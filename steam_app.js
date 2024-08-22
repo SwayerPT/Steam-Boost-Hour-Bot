@@ -1,269 +1,268 @@
 /*
-    Project: Steam Hour Bot
-    Created by Swayer
-    version.1.3.9.
+    Project: Steam Hour Bot - NodeJS
+    Note: By using this bot I will not be responsible if you edit the code for bad purposes.
+    
+    Created by SwayerPT with Love.
+    Donate your candie and help to improve with new projects.
+    https://steamcommunity.com/id/swayerpt/
 */
 
-//=============== CONSTRUTORS  ===============//
+const SteamUserReserved = require("steam-user");
+const fs = require("fs");
+const readlineSync = require("readline-sync");
+const chalk = require("chalk");
+const SteamCommunity = require("steamcommunity");
+const axios = require("axios");  // New dependency
 
-const Steam = require('steam-user'), 
-      fs = require('fs'), 
-      readlineSync = require('readline-sync'), 
-      chalk = require('chalk'),
-      SteamCommunity = require('steamcommunity');
-const client = new Steam();
-//const settings = require('./config.json');
+// Initialize Steam client and other necessary variables
+const client = new SteamUserReserved();
 const settings = {
-  "acceptRandomFriendRequests": false,  
-  "acceptItemNotify": true,  
-  "acceptTradesNotify": true,  
-  "acceptReplys": false,  
-  "games": [739630] //739630 => Phantasmophobia, 730 => CSGO
+    acceptRandomFriendRequests: false,
+    acceptItemNotify: true,
+    acceptTradesNotify: true,
+    acceptReplys: false,
+    limits: 25,
+    restriction: 5,
+    games_id: [],
+    proceedWithBannedAccount: false // New setting to handle banned accounts
+};
+
+let mobileCode, version = "v1.5.1";
+
+// Displaying the header
+console.log(chalk.white.bold.bgBlack("    Developed by: SwayerPT     "));
+console.log(chalk.white.bold.bgBlack("    Steam Hour [Bot]     "));
+console.log(chalk.gray.underline("                   " + version));
+console.log(chalk.black.bold.bgWhite("      Steam Login        "));
+
+// Function to get input from user
+function getInput() {
+    let gamesid = readlineSync.question(chalk.gray.bold(" GamesID (comma-separated) ") + ": ");
+    let username = readlineSync.question(chalk.gray.bold(" Username ") + ": ");
+    let password = readlineSync.question(chalk.gray.bold(" Password ") + ": ", { hideEchoBack: true });
+    let hasTwoFactorCode = readlineSync.keyInYNStrict(chalk.gray.bold(" Do you have a SteamGuard? ") + ": ");
+    return { gamesid, username, password, hasTwoFactorCode };
 }
 
-//=============== VARIABLES  ===============//
-console.log(chalk.black.bold.bgWhite('    Steam Hour [Bot]     '));
-console.log(chalk.gray.underline(' v1.3.8'));
-console.log(chalk.black.bold.bgWhite('      Steam Login        '));
-
-var username = readlineSync.question(chalk.gray.bold(' Username ') + ': ');
-var password = readlineSync.question(chalk.gray.bold(' Password ') + ': ', {hideEchoBack: true});
-var mobileCode = readlineSync.question(chalk.gray.bold(' Steam Guard ') + ': ');
-var wstream;
-var dtiming = new Date();
-var tstamp = Math.floor(Date.now() / 1000);
-
-
-//=============== COUNT GAMES  ===============//
-
-var CountGamesUsed = function(array) {
-  for (var i = array.Length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
+// Function to shuffle and count games
+function CountGamesUsed(gamesArray) {
+    for (let i = gamesArray.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [gamesArray[i], gamesArray[j]] = [gamesArray[j], gamesArray[i]];
+    }
+    return gamesArray;
 }
 
-//=============== START SESSION  ===============//
+// Function to parse the input of gamesid and ensure it's an array of integers
+function parseInput(input) {
+    return input.split(",").map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
+}
 
-client.logOn({
-  accountName: username,
-  password: password,
-  twoFactorCode: mobileCode  
-});
+// Function for logging
+function log(message) {
+    let timestamp = new Date().toLocaleTimeString();
+    console.log(" " + timestamp + " - \x1b[36m%s\x1b[0m", "[STEAM] " + message);
+}
 
-client.on("loggedOn", function() {
-  client.setPersona(Steam.EPersonaState.Away);
+// Function for error logging
+function error(message) {
+    let timestamp = new Date().toLocaleTimeString();
+    console.log(" " + timestamp + " - \x1b[36m%s\x1b[0m", "[ERROR] " + message);
+}
+
+// Function for shutting down the bot
+function shutdown(exitCode = 0) {
+    log(chalk.red("Connection Lost..."));
+    client.logOff();
+    client.once("disconnected", () => process.exit(exitCode));
+    setTimeout(() => process.exit(exitCode), 500);
+}
+
+// Log in to Steam
+const { gamesid, username, password, hasTwoFactorCode } = getInput();
+settings.games_id = parseInput(gamesid);
+
+if (hasTwoFactorCode) {
+    while (true) {
+        mobileCode = readlineSync.question(chalk.gray.bold(" SteamGuard ") + ": ", { hideEchoBack: true });
+
+        try {
+            client.logOn({ accountName: username, password: password, twoFactorCode: mobileCode });
+            break; // If login is successful, break out of the loop
+        } catch (e) {
+            if (e.eresult === SteamUserReserved.EResult.AccountLogonDenied) {
+                log(chalk.red("Wrong, you have SteamGuard. Please insert your SteamGuard code again:"));
+            } else {
+                throw e; // Handle other errors normally
+            }
+        }
+    }
+} else {
+    client.logOn({ accountName: username, password: password });
+}
+
+client.on("loggedOn", () => {
+    client.setPersona(SteamUserReserved.EPersonaState.Away);
 
     if (username === "" || password === "") {
-        log((chalk.red("Login Denied - Empty fields.")));
-        shutdown();        
+        console.log(chalk.black.bold.bgWhite("    Connection Status    "));
+        log(chalk.red("Login Denied - Empty fields."));
+        shutdown();
     } else {
-        log((chalk.green("Logged on Steam Client.")));
-        log((chalk.yellow("Tip: Use (CTRL + C) to Log out.")));
-        client.gamesPlayed(CountGamesUsed(settings.games));        
-    }   
+        console.log(chalk.black.bold.bgWhite("    Connection Status    "));
+        client.on("accountInfo", (name) => {
+            log(chalk.green("Logged in as " + name + "."));
+            client.on("vacBans", (bans, games) => {
+                if (bans > 0) {
+                    log(chalk.red("Verified (" + bans + ") ban" + (bans === 1 ? "" : "s") + (games.length === 0 ? "" : " in " + games.join(", ")) + "."));
+
+                    // Ask the user if they want to proceed with the banned account
+                    let proceed = readlineSync.keyInYNStrict(chalk.red("Do you still want to proceed with game-banned accounts? ") + ": ");
+                    settings.proceedWithBannedAccount = proceed;
+
+                    if (!settings.proceedWithBannedAccount) {
+                        log(chalk.red("[BOT] not able to proceed with banned games."));
+                        shutdown();
+                    }
+                }
+            });
+        });
+        log(chalk.yellow("Tip: Use (CTRL + C) to Logout."));
+        client.gamesPlayed(CountGamesUsed(settings.games_id));
+    }
 });
 
-//=============== CHECK SERVER AVAILABILITY  ===============//
-
-if (fs.existsSync('servers')) {
-    Steam.servers = JSON.parse(fs.readFileSync('servers'));
-    log((chalk.green("Connecting...")));   
+if (fs.existsSync("servers")) {
+    SteamUserReserved.servers = JSON.parse(fs.readFileSync("servers"));
+    log(chalk.green("Connecting ..."));
 }
 
-client.on("connected", function() {
-    log((chalk.green("Initializing...")));  
+client.on("connected", () => {
+    log(chalk.green("Starting Bot..."));
 });
 
-//=============== LIMITATIONS (PREVENT LIMITED ACCOUNTS WITH ONLY 5 GAMES)  ===============//
-
-client.on('accountLimitations', function (limited, communityBanned, locked) {
-    //account is limited
-    if (limited) {  
-        if(settings.games.length < 5) {
-                log((chalk.blue("This Account is Limited.")));
-                log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));
-            } else {
-                log("Exceeded the limit " + settings.games.length + " of 5 Games.");
-                log((chalk.red("Exceeded the limit " + settings.games.length + " of 5 Limited Games...")));
-                log((chalk.red("Logging off..."))); 
-                
-                client.logOff();
-                shutdown(); 
-            }      
-    } else if(settings.games.length < 25) {
-                log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));
-            
+client.on("accountLimitations", (limited, communityBanned, locked, canInviteFriends) => {
+    console.log(chalk.black.bold.bgWhite("      Initializing       "));
+    if (canInviteFriends) {
+        log(chalk.green("Checking Invite Friends ..."));
     } else {
-            log((chalk.red("Exceeded the limit " + settings.games.length + " of 25 Limited Games...")));
-            log((chalk.red("Logging off...")));  
-            
-			client.logOff();
-	        shutdown();                   
-    }  
-    //community bann
-    if (communityBanned){
-        log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
-        log((chalk.red("Connection Lost!")));
-        client.logOff();
-        shutdown();          
+        log(chalk.red("[Invite] canInviteFriends Banned."));
     }
-    //locked account
-	if(locked) {
-        log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
-        log((chalk.red("Connection Lost!")));
-        client.logOff();
-        shutdown();  
-	}    
-});
 
-client.on('vacBans', function(numBans, appids) {
-	if(numBans > 0) {
-	   log((chalk.red("Verified ("+ numBans + ") ban" + (numBans == 1 ? '' : 's') + "." + (appids.length == 0 ? '' : " in " + appids.join(', ')) )));
-       log((chalk.red("[BOT] not be able to proceed with banned accounts."))); 
-       log((chalk.red("Connection Lost!")));
-       client.logOff();
-       shutdown(); 
-	}
-});
+    if (communityBanned) {
+        log(chalk.red("[Community] Community Banned."));
+    } else {
+        log(chalk.green("Checking Community ..."));
+    }
 
-//=============== REQUESTS  ===============//
+    if (locked) {
+        log(chalk.red("[Account] Locked Account."));
+    } else {
+        log(chalk.green("Checking Account ..."));
+    }
 
-client.on('friendRelationship', (steamID, relationship) => {
-	if (relationship === 2 && settings.acceptRandomFriendRequests) {
-	  client.addFriend(steamID);
-        //client.removeFriend(steamID);  
-      client.chatMessage(steamID, "Thank you for Added me. We talk later.");        
-      log(chalk.yellow('You have an invite from '+steamID+'.'));        
-	}
-});
+    log(chalk.green("Initializing ..."));
 
-//=============== ITEMS NOTIFY  ===============//
-
-client.on('newItems', function (count) {
-    if(settings.acceptItemNotify) {
-      if(count > 0) {
-          log(chalk.green("You received ("+ count + ") items in your Inventory."));  
-      } 
+    if (limited) {
+        if (settings.games_id.length < settings.restriction) {
+            log(chalk.blue("This Account is Limited."));
+            log(chalk.green("[Limited] Currently In-Game " + settings.games_id.length + "."));
+        } else {
+            error(chalk.red("Exceeded the limit of 5 Games..."));
+            shutdown();
+        }
+    } else {
+        if (settings.games_id.length < settings.limits) {
+            log(chalk.green("Currently In-Game " + settings.games_id.join(", ") + "."));
+        } else {
+            error(chalk.red("Exceeded the limit of 25 Games."));
+            shutdown();
+        }
     }
 });
 
-//=============== TRADES NOTIFY  ===============//
-
-client.on('tradeOffers', function (number, steamID) {
-    if(settings.acceptTradesNotify) {
-        if (number > 0) {
-            log(chalk.green("You received ("+ number +") Trade Offer from "+steamID+"."));     
-        }        
-    }    
+client.on("friendRelationship", (steamID, relationship) => {
+    if (relationship === 2 && settings.acceptRandomFriendRequests) {
+        client.addFriend(steamID);
+        log(chalk.yellow("You have an invite from " + steamID + "."));
+    } else {
+        error(chalk.red("Unable to Accept Requests."));
+    }
 });
 
-
-//=============== AUTO REPLY  ===============//
-
-client.on("friendMessage", function(steamID, message) {
-    if(settings.acceptReplys) {
-        if (message == "hello") {
-            client.chatMessage(steamID, "Yoo, wait a moment. ;D");
-        }
-        if (message == "play") {
-            client.chatMessage(steamID, "Not now... i'm making missions");
-        }  
-        if (message == "Why") {
-            client.chatMessage(steamID, "Because i'm doing something");
-        }
-        if (message == "yo") {
-            client.chatMessage(steamID, "Yoo, wait a moment ;D");
-        }
-        if (message == "Do you want to play?") {
-            client.chatMessage(steamID, "Not now");
-        }
-        if (message == "Whatsup") {
-            client.chatMessage(steamID, "hey");
-        }
-        if (message == "Are you there?") {
-            client.chatMessage(steamID, "Yes, but i'm leaving... bye");
-        }
-        if (message == "...") {
-            client.chatMessage(steamID, "Not now!");
-        } 
-        if (message == "yes") {
-            client.chatMessage(steamID, "Not now!");
-        }            
-    }	
+client.on("newItems", (count) => {
+    if (settings.acceptItemNotify && count > 0) {
+        log(chalk.yellow("You received (" + count + ") items in your Inventory."));
+    } else {
+        error(chalk.red("Unable to Drop."));
+    }
 });
 
+client.on("tradeOffers", (count, steamID) => {
+    if (settings.acceptTradesNotify && count > 0) {
+        log(chalk.yellow("You received (" + count + ") Trade Offer from " + steamID + "."));
+    } else {
+        error(chalk.red("Unable to Trade."));
+    }
+});
 
-//=============== ERROR SYS  ===============//
+client.on("friendMessage", (steamID, message) => {
+    log(chalk.yellow("Received a message from " + steamID.getSteam3RenderedID() + " saying: " + message));
+    if (settings.acceptReplys) {
+        switch (message.toLowerCase()) {
+            case "hello":
+                client.chatMessage(steamID, "Yoo, wait a moment. ;D");
+                break;
+            case "play":
+                client.chatMessage(steamID, "Not now... I'm making missions");
+                break;
+            case "why":
+                client.chatMessage(steamID, "Because I'm doing something");
+                break;
+            case "yo":
+                client.chatMessage(steamID, "Yoo, wait a moment ;D");
+                break;
+            case "do you want to play?":
+                client.chatMessage(steamID, "Not now");
+                break;
+            case "whatsup":
+                client.chatMessage(steamID, "Hey");
+                break;
+            case "are you there?":
+                client.chatMessage(steamID, "Yes, but I'm leaving... bye");
+                break;
+            case "...":
+                client.chatMessage(steamID, "Not now!");
+                break;
+            case "yes":
+                client.chatMessage(steamID, "Not now!");
+                break;
+            default:
+                client.chatMessage(steamID, "Sorry, I can't chat right now.");
+        }
+    } else {
+        error(chalk.red("Unable to Auto-answer."));
+    }
+});
 
-client.on("error", function(err) {
-  //log("[STEAM] Login Failed on Client.");    
-  //log(err);
-    if (err.eresult == Steam.EResult.InvalidPassword)
-    {
-        log((chalk.red("Login Denied - User or Password Wrong."))); 
+client.on("error", (e) => {
+    console.log(chalk.white.bold.bgRed("    Connection Status    "));
+    if (e.eresult === SteamUserReserved.EResult.InvalidPassword) {
+        error(chalk.red("User or Password Wrong."));
+        shutdown();
+    } else if (e.eresult === SteamUserReserved.EResult.AlreadyLoggedInElsewhere) {
+        error(chalk.red("Already logged in!"));
+        shutdown();
+    } else if (e.eresult === SteamUserReserved.EResult.AccountLogonDenied) {
+        error(chalk.red("SteamGuard is required!"));
+
+        // If the user said "No" but SteamGuard is required, prompt them to enter the code
+        let retrySteamGuard = readlineSync.question(chalk.gray.bold(" SteamGuard App Code ") + ": ", { hideEchoBack: true });
+        client.logOn({ accountName: username, password: password, twoFactorCode: retrySteamGuard });
+    } else {
+        error(chalk.red("An unknown error occurred."));
         shutdown();
     }
-    else if (err.eresult == Steam.EResult.AlreadyLoggedInElsewhere)
-    {
-        log((chalk.red("Login Denied -  Already logged in!")));         
-        shutdown();
-    }
-    else if (err.eresult == Steam.EResult.AccountLogonDenied)
-    {
-        log((chalk.red("Login Denied - SteamGuard is required")));        
-        shutdown();
-    }
 });
 
-
-//=============== SHUT DOWN SYS  ===============//
-
-process.on('SIGINT', function() {
-    log((chalk.red("Logging off...")));  
-	shutdown();
-});
-
-
-//=============== STATUS ON CONSOLE  ===============//
-
-console.log(chalk.black.bold.bgWhite('    Connection Status    '));
-
-//=============== FUNCTIONS ===============//
-
-function log(message) {
-	var date = new Date();
-	var time = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
-	
-	for(var i = 1; i < 6; i++) {
-		if(time[i] < 10) {
-			time[i] = '0' + time[i];
-		}
-	}
-	console.log(' ' + time[3] + ':' + time[4] + ':' + time[5] + ' - \x1b[36m%s\x1b[0m', '[STEAM] ' + message);
-}
-
-function games() {
-	if(settings.games.length < 25) {
-       log((chalk.green("Initializing " + settings.games.length + " game and playing on "+settings.games+".")));                     
-    } else {
-       log((chalk.green("Exceeded the limit " + settings.games.length + " of 25...")));         
-       log((chalk.red("Logging off...")));                  
-       client.logOff();
-	   shutdown();                   
-   }    
-}
-
-function shutdown(code) {
-	client.logOff();
-	client.once('disconnected', function() {
-		process.exit(code);
-	});
-
-	setTimeout(function() {
-		process.exit(code);
-	}, 500);
-}
+process.on("SIGINT", shutdown);
