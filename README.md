@@ -7,23 +7,24 @@
 <p align="center"><br>Steam Boost Hour [Bot] Source - Community</br>
 Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Releases</a>
 </br>
-This project is running by me(Swayer) Official with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
-There is a lot of scripts like this one in our Community, non-offical and copied, the main goal is to give satisfation to the Community. Everyone is welcome to try or use. No virus, No hacking, Only pure JS.
+This project is running by me (Swayer) Official with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
+This is a comprehensive Steam bot script that automates various actions related to Steam Accounts, such as managing game-time, handling friend requests, trade offers, handling drops, Auto-replies, Handles Game shuffling, Account restrictions and a lot more... 
 </p>
 
 ## Simple Questions
 
-**Do i get Vacban or is a Cheat?**
+**Do you get VAC or is a Cheat?**
 - No, this bot is used with **Steam Modules & NODEJS**, it's the same as **Steam Auth App** for your Windows, but the difference is that Simulate the games.
 
 **Is this Bot saving Information about my Account?**
-- No, You can only enter your **Username** and **Password** into the Console Prompt, this details are secure, and nobody can get them. (Session Mode)
-  (this app will never save your credendials or ask anything related to steal you. My goal is to help you and to make it simple and secure.).
+- No, it does not save user credentials to disk or any persistent storage cloud.
 
 **Have the Creator or the Community Access?**
 - No, this Bot is running in your **Localhost** (your pc) and your details cannot be Tracked.
 
-
+**In future updates will the credentials be saved or else?**
+- No, my goal is to prevent any hacking located on the scripts or other types of saving credentials. Unfortunately i cannot control if someone copy and edit the script and use by his choice.
+- In the future i believe i will find better ways to protect and make sure that every credential on the prompt are deleted after success login.
 
 ## Let's Beggin
 - Install the packages using the file "install.bat".
