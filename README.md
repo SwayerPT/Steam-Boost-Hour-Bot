@@ -4,53 +4,51 @@
   Steam Boost Hour [Bot]
 </h1>
 
-<p align="center"><br>Steam Boost Hour [Bot] Source - Community</br>
+<p align="center"><br>Steam Boost Hour [Bot] NodeJS - Community</br>
 Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Releases</a>
 </br>
-This project is running by me (Swayer) Official with the aim of getting all the community satisfied giving them **Hours** and some **Drops**.
-This is a comprehensive Steam bot script that automates various actions related to Steam Accounts, such as managing game-time, handling friend requests, trade offers, handling drops, Auto-replies, Handles Game shuffling, Account restrictions and a lot more... 
+🚀 Steam Hour Bot is a NodeJS-based application designed to automate playtime tracking on Steam. The bot logs into your Steam account and simulates playing games, helping you boost your in-game hours without actively playing.
+<br/>⚠️ Disclaimer: The author is not responsible for any misuse of this code. Please use responsibly and adhere to Steam's terms of service.
 </p>
 
-## Simple Questions
+## 🎯 Features
+<p>Simulates playtime for selected Steam games.</p>
+<p>Tracks and logs playtime for each game.</p>
+<p>Supports encryption for secure username and password storage.</p>
+<p>Customizable settings for appearance, trade notifications, and friend requests.</p>
+<p>Error handling and shutdown procedures for safe operation.</p>
+<p>User-friendly console interface for easy setup and configuration.</p>
 
-**Do you get VAC or is a Cheat?**
-- No, this bot is used with **Steam Modules & NODEJS**, it's the same as **Steam Auth App** for your Windows, but the difference is that Simulate the games.
+## ⚙️ Setup & Installation
+Prerequisites
+<p>Before you begin, ensure you have the following:</p>
 
-**Is this Bot saving Information about my Account?**
-- No, it does not save user credentials to disk or any persistent storage cloud.
-
-**Have the Creator or the Community Access?**
-- No, this Bot is running in your **Localhost** (your pc) and your details cannot be Tracked.
-
-**In future updates will the credentials be saved or else?**
-- No, my goal is to prevent any hacking located on the scripts or other types of saving credentials. Unfortunately i cannot control if someone copy and edit the script and use by his choice.
-- In the future i believe i will find better ways to protect and make sure that every credential on the prompt are deleted after success login.
-
-## Let's Beggin
-- Install the packages using the file "install.bat".
-- After installed, check carefully if everything is updated.
-- Click on "start.bat" to iniciate your bot.
-
-## Let's Start the bot
-- To add **new games** insert on CMD called "GamesID (comma-separated)" with game-codes like "739630, 739630, 739630".
-- Login using your credencials securely. *(If vacbanned, choose YES to proceed)*
+<p>Node.js installed on your system (v14 or later recommended).</p>
+<p>A Steam account with credentials ready.</p>
+<p>Knowledge of the risks associated with automating playtime on Steam.</p>
   
-Codes: You can get them from the link when you search a game on market http://steamcommunity.com/app/730 -> **730** ==  CS:GO.
- 
-<h1 align="center">
-  <img  src="https://i.imgur.com/LH2btmZ.png" />
-</h1>
+## Installation
 
+<p>Before running the bot, ensure that you have the following installed:</p> 
+<p>1. Node.js (version 14.x or higher) https://nodejs.org/</p>
+<p>2. Install the required Node.js packages:</p>
+<p>3.Using the file install.bat</p>
+<p>4. Start the start.bat file.</p>
 
-That's it!
+## Commands
+<p>CTRL + C: Safely shuts down the bot.</p>
+<p>Log Handling: Logs actions, errors, and bot activities into logs.txt.</p>
+<p>Shutdown: Handles safe shutdown with playtime logging.</p>
+<p>Error Management: Manages login errors and prompts for Steam Guard codes if necessary.</p>
 
-Note: You can only idle 25 games per Account/Bot. Idling more than 25 Games will automaticly Bug your Steam Game Hours.
-Note 2: It is possible now to login with VacBan accounts, but remember, it's yor account, your choice.
+## Support
+If you encounter any issues or need support, feel free to:
 
-## Questions? Fell free! (Sorry any delay on reply): 
-By Github issues: <a href='https://github.com/SwayerPT/Steam-Boost-Hour-Bot/issues'>here</a>
-or
-https://steamcommunity.com/id/swayerpt/
+Open an issue on GitHub <a href='https://github.com/SwayerPT/Steam-Boost-Hour-Bot/issues'>here</a>.
+Reach out to SwayerPT on Steam.
+Contribute by submitting pull requests for enhancements or bug fixes.
 
 ## DONATIONS BY STEAM TRADE
 https://steamcommunity.com/tradeoffer/new/?partner=172427377&token=m9yCqbtE
+
+Developed by SwayerPT with ❤️. Enjoy and play responsibly!
