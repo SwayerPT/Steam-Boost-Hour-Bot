@@ -18,6 +18,7 @@ Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-B
 <p>Customizable settings for appearance, trade notifications, and friend requests.</p>
 <p>Error handling and shutdown procedures for safe operation.</p>
 <p>User-friendly console interface for easy setup and configuration.</p>
+<p>Auto-Reply & Learner.</p>
 
 ## ⚙️ Setup & Installation
 Prerequisites
