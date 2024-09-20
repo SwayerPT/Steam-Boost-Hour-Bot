@@ -1,7 +1,7 @@
 {
   "name": "Steam-Boost-Hour-[Bot]",
-  "version": "1.5.1",
-  "description": "A special bot that can change your entire steam value in Hours and Drops.",
+  "version": "1.5.5",
+  "description": "Unleash Your Hours: The Ultimate Boosting Bot for Every Gamer!.",
   "main": "steam_app.js",
   "repository": {
     "type": "git",
