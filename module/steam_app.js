@@ -37,7 +37,7 @@ const settings = {
     games_id: [], // no need to change
     proceedWithBannedAccount: false, //to proceed with bans
     playSoundOnNewItem: true, //turn sound on
-    version: 'v1.5.8'
+    version: 'v1.5.9'
 };
 
 /**********************************************************************************************
@@ -185,16 +185,28 @@ const settings = {
     }
 
     function decrypt(encryptedData, password) {
+        encryptedData = String(encryptedData); 
+    
+        if (!encryptedData || typeof encryptedData !== 'string' || !encryptedData.includes(':')) {
+            throw new Error('Invalid encrypted data format.');
+        }
         const [ivHex, encryptedText] = encryptedData.split(':');
+        if (!ivHex || !encryptedText) {
+            throw new Error('Invalid encrypted data components.');
+        }
         const iv = Buffer.from(ivHex, 'hex');
+        if (iv.length !== 16) {
+            throw new Error('Invalid IV length. Expected 16 bytes.');
+        }
         const key = crypto.createHash('sha256').update(password).digest();
-
+    
         const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
         let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
         decrypted += decipher.final('utf8');
-
+    
         return decrypted;
     }
+    
 
     // Function for shutting down the bot
     async function shutdown(signalOrCode = 0) {
@@ -328,7 +340,8 @@ function getInput() {
     // Save credentials to file
     saveCredentials({ gamesid, username, password, hasTwoFactorCode, appearOnline }, encryptCredentials, masterPassword);
 
-    return { gamesid, username, password, hasTwoFactorCode, appearOnline, encryptCredentials, masterPassword };
+    // Reload credentials from file to ensure consistency
+    return loadCredentials(masterPassword);
 }
 
 // Function to save credentials to a file
@@ -345,45 +358,59 @@ function saveCredentials(credentials, encryptCredentials, masterPassword) {
         const encryptedUsername = encrypt(credentials.username, masterPassword);
         const encryptedPassword = encrypt(credentials.password, masterPassword);
 
-        storedCredentials.username = encryptedUsername;
-        storedCredentials.password = encryptedPassword;
+        // Ensure encrypted data is stored as strings
+        storedCredentials.username = String(encryptedUsername);
+        storedCredentials.password = String(encryptedPassword);
     } else {
         // Store credentials in plaintext (Not recommended)
-        storedCredentials.username = credentials.username;
-        storedCredentials.password = credentials.password;
+        storedCredentials.username = String(credentials.username);
+        storedCredentials.password = String(credentials.password);
     }
 
-    fs.writeFileSync('module/credentials.txt', JSON.stringify(storedCredentials), { flag: 'w' });
+    const filePath = path.join(__dirname, 'credentials.txt');
+    fs.writeFileSync(filePath, JSON.stringify(storedCredentials, null, 2), { flag: 'w' });
 }
 
 // Function to load and decrypt credentials from a file
-function loadCredentials() {
-    if (fs.existsSync('module/credentials.txt')) {
-        const data = fs.readFileSync('module/credentials.txt', 'utf-8');
+function loadCredentials(providedMasterPassword = null) {
+    const filePath = path.join(__dirname, 'credentials.txt');
+    if (fs.existsSync(filePath)) {
+        const data = fs.readFileSync(filePath, 'utf-8');
         const storedCredentials = JSON.parse(data);
 
         if (storedCredentials.encryptCredentials) {
-            // Ask for master password to decrypt credentials
-            let masterPassword = readlineSync.question(chalk.gray.bold(" Enter your master password to decrypt your credentials ") + ": ", { hideEchoBack: true });
+            let attempts = 0;
+            const maxAttempts = 3;
+            let masterPassword = providedMasterPassword;
 
-            try {
-                // Decrypt the username and password
-                const decryptedUsername = decrypt(storedCredentials.username, masterPassword);
-                const decryptedPassword = decrypt(storedCredentials.password, masterPassword);
+            while (attempts < maxAttempts) {
+                if (!masterPassword) {
+                    masterPassword = readlineSync.question(chalk.gray.bold(" Enter your master password to decrypt your credentials ") + ": ", { hideEchoBack: true });
+                }
 
-                return {
-                    gamesid: storedCredentials.gamesid,
-                    username: decryptedUsername,
-                    password: decryptedPassword,
-                    hasTwoFactorCode: storedCredentials.hasTwoFactorCode,
-                    appearOnline: storedCredentials.appearOnline,
-                    masterPassword, // Save for later use
-                    encryptCredentials: true
-                };
-            } catch (error) {
-                console.error(chalk.red("Failed to decrypt credentials. Please check your master password."));
-                return null; // Indicate failure to load credentials
+                try {
+                    // Attempt to decrypt
+                    const decryptedUsername = decrypt(storedCredentials.username, masterPassword);
+                    const decryptedPassword = decrypt(storedCredentials.password, masterPassword);
+
+                    // Store decrypted credentials and masterPassword
+                    return {
+                        gamesid: storedCredentials.gamesid,
+                        username: decryptedUsername,
+                        password: decryptedPassword,
+                        hasTwoFactorCode: storedCredentials.hasTwoFactorCode,
+                        appearOnline: storedCredentials.appearOnline,
+                        masterPassword, // Save for later use
+                        encryptCredentials: true
+                    };
+                } catch (error) {
+                    console.error(chalk.red("Failed to decrypt credentials. Please check your master password."));
+                    attempts++;
+                    masterPassword = null; // Reset to prompt again
+                }
             }
+            console.error(chalk.red("Maximum decryption attempts exceeded."));
+            return null; // Indicate failure to load credentials
         } else {
             // Credentials are stored in plaintext
             console.warn(chalk.red.bold("Warning: Your credentials are stored in plaintext. It is strongly recommended to encrypt them."));
@@ -412,6 +439,8 @@ if (loadedCredentials) {
     settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim());
 } else {
     loadedCredentials = getInput();
+    settings.appearOnline = loadedCredentials.appearOnline;
+    settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim());
 }
 
 // Log in to Steam
@@ -420,36 +449,49 @@ async function login() {
     const maxRetries = 3;
     const delayBetweenRetries = 3000; // milliseconds
 
-    // Load and decrypt the username and password
-    const { username, password, hasTwoFactorCode } = loadedCredentials;
-
     while (retries < maxRetries) {
         try {
-            if (hasTwoFactorCode) {
-                const mobileCode = readlineSync.question(chalk.gray.bold(" SteamGuard Code ") + ": ", { hideEchoBack: true });
-                client.logOn({ accountName: username, password, twoFactorCode: mobileCode });
-            } else {
-                client.logOn({ accountName: username, password });
-            }
+            await new Promise((resolve, reject) => {
+                const onLoggedOn = () => {
+                    client.removeListener('error', onError);
+                    resolve();
+                };
+                const onError = (err) => {
+                    client.removeListener('loggedOn', onLoggedOn);
+                    reject(err);
+                };
+
+                client.once('loggedOn', onLoggedOn);
+                client.once('error', onError);
+
+                if (loadedCredentials.hasTwoFactorCode) {
+                    const mobileCode = readlineSync.question(chalk.gray.bold(" SteamGuard Code ") + ": ", { hideEchoBack: true });
+                    client.logOn({
+                        accountName: loadedCredentials.username,
+                        password: loadedCredentials.password,
+                        twoFactorCode: mobileCode
+                    });
+                } else {
+                    client.logOn({
+                        accountName: loadedCredentials.username,
+                        password: loadedCredentials.password
+                    });
+                }
+            });
+            // If logged on successfully, break the loop
+            break;
         } catch (e) {
-            if (e.eresult === SteamUserReserved.EResult.AccountLogonDenied) {
-                log(chalk.red("Wrong, Please insert your SteamGuard code again:"));
-            } else {
-                throw e; // Handle other errors normally
-            }
             retries++;
             if (retries < maxRetries) {
+                error(chalk.red(`Login attempt ${retries} failed: ${e.message}. Retrying...`));
                 await new Promise(res => setTimeout(res, delayBetweenRetries)); // Wait before retrying
+            } else {
+                error(chalk.red(`Maximum login retries exceeded.`));
+                shutdown();
             }
         }
     }
-
-    if (retries >= maxRetries) {
-        error(chalk.red("Maximum login retries exceeded."));
-        shutdown();
-    }
 }
-
 login();
 
 /**********************************************************************************************
@@ -639,7 +681,9 @@ function loadReplies() {
             }
         });
     } else {
-        error(chalk.red("Responses file not found!"));
+        // Create an empty memory.txt file
+        fs.writeFileSync(filePath, '', { flag: 'w' });
+        console.log(chalk.yellow("Created a new memory.txt file."));
     }
 
     return replies;
@@ -720,28 +764,35 @@ client.on("error", (e) => {
     switch(e.eresult) {
         case SteamUserReserved.EResult.InvalidPassword:
             error(chalk.red("Login failed: The password entered is incorrect. Please check your credentials and try again."));
+            shutdown();
             break;
         case SteamUserReserved.EResult.AlreadyLoggedInElsewhere:
             error(chalk.red("Login failed: The account is already logged in elsewhere. Please log out from other devices and try again."));
+            shutdown();
             break;
         case SteamUserReserved.EResult.AccountLogonDenied:
             error(chalk.red("Login failed: SteamGuard authentication is required. Please check your email or mobile app for the SteamGuard code."));
             
-            // Prompt for SteamGuard code if not provided earlier
+            // Prompt for SteamGuard code
             let retrySteamGuard = readlineSync.question(chalk.gray.bold(" Enter SteamGuard App Code ") + ": ", { hideEchoBack: true });
-            client.logOn({ accountName: decrypt(username), password: decrypt(password), twoFactorCode: retrySteamGuard });
+            client.logOn({ 
+                accountName: loadedCredentials.username, 
+                password: loadedCredentials.password, 
+                twoFactorCode: retrySteamGuard 
+            });
             return; // Don't shut down, reattempt login
         case SteamUserReserved.EResult.RateLimitExceeded:
             error(chalk.red("Login failed: Rate limit exceeded. Too many login attempts. Please wait a few minutes and try again."));
+            shutdown();
             break;
         case SteamUserReserved.EResult.Timeout:
             error(chalk.red("Connection failed: The connection to Steam timed out. This could be due to network issues. Please check your connection and try again."));
+            shutdown();
             break;
         default:
             error(chalk.red(`An unknown error occurred: ${e.message} (Error code: ${e.eresult}). Please refer to the Steam documentation or contact support for assistance.`));
+            shutdown();
     }
-
-    shutdown();
 });
 
 // Catch SIGINT and SIGTERM to safely shut down the bot
