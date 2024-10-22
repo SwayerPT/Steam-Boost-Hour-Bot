@@ -263,8 +263,8 @@ let startTime = Date.now(); // Track when the bot started
         const now = Date.now();
         
         if (loadedCredentials) {
-            settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim()); // Split into array
-        }           
+            settings.games_id = parseInput(loadedCredentials.gamesid);
+        }       
         
         for (const gameId of settings.games_id) {
             
@@ -436,11 +436,11 @@ if (loadedCredentials) {
 
     // Update settings based on loaded credentials
     settings.appearOnline = loadedCredentials.appearOnline;
-    settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim());
+    settings.games_id = parseInput(loadedCredentials.gamesid);
 } else {
     loadedCredentials = getInput();
     settings.appearOnline = loadedCredentials.appearOnline;
-    settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim());
+    settings.games_id = parseInput(loadedCredentials.gamesid);
 }
 
 // Log in to Steam
@@ -503,8 +503,8 @@ client.on("loggedOn", () => {
     const { username, password, appearOnline, gamesid } = loadedCredentials;
     
     if (loadedCredentials) {
-        settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim()); // Split into array
-    }   
+        settings.games_id = parseInput(loadedCredentials.gamesid);
+    }
     
     //set friendchat mode.
     if (settings.appearOnline) {

@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+.VSCodeCounter
+/module/memory.txt
+/module/credentials.txt
