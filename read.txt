@@ -1,0 +1,66 @@
+Credits
+Developer: SwayerPT
+Contributors: Open-source community
+Disclaimer: By using this bot, you acknowledge that the developer is not responsible for any bans or negative consequences resulting from its use.
+
+The Steam Hour Bot is a Node.js application designed to boost your playtime hours in Steam games. 
+Developed with love by SwayerPT, this bot offers several features like game tracking, friend request management, and messaging automation.
+
+This document provides detailed guidance on installing, configuring, and using the bot. Additionally, 
+it explains the bot's encryption mechanism, ensuring that your login credentials remain secure. 
+___________________________________________________________________________
+
+:::: Installation ::::
+
+1. Before running the bot, ensure that you have the following installed: 
+   Node.js (version 14.x or higher) https://nodejs.org/
+2. Install the required Node.js packages:
+   Using the file install.bat
+
+or (after install, can only be used start.bat, but suggest install.bat, automaticly updates and starts clean)
+
+3. Start the start.bat file.
+
+___________________________________________________________________________
+
+:::: Configuration on file ::::
+
+The bot has several configurable settings, which can be found in the module/steam.app.js file:
+
+acceptRandomFriendRequests: Accepts random friend requests if set to true.
+acceptItemNotify: Sends notifications about received items if set to true.
+acceptTradesNotify: Sends trade notifications if set to true.
+acceptReplys: Sends automated replies if set to true.
+limits: Sets the limit for friend requests, trades, etc.
+restriction: Restricts certain actions after a specific limit is reached.
+proceedWithBannedAccount: Whether to proceed if the account is banned.
+
+___________________________________________________________________________
+
+:::: Running the Bot ::::
+
+When you run the bot, you will be prompted to enter several details:
+
+1. Games-ID: Enter the IDs of the games you want to boost, separated by commas (e.g., 730, 440, 570).
+2. Username: Enter your Steam username.
+3. Password: Enter your Steam password (it will be encrypted).
+4. SteamGuard: Indicate whether you have SteamGuard enabled (Y or N).
+5. Online Status: Choose whether you want to appear online or invisible while boosting (Y for online, N for invisible).
+
+___________________________________________________________________________
+
+:::: Bot Features ::::
+
+Game Tracking and Playtime Logging
+The bot shuffles the games you wish to boost and tracks the time spent playing each game.
+It logs the playtime for each game every hour.
+You can view the total playtime in HH:MM
+format.
+Friend Request Management
+Automatically accepts friend requests if enabled in the settings.
+Logs friend messages and optionally replies with an automated message.
+Error Handling and Logging
+The bot logs all important events, errors, and tips in the console.
+If an error occurs during login, the bot shuts down gracefully.
+SteamGuard Support
+The bot supports SteamGuard, allowing you to input the 2FA code during login.

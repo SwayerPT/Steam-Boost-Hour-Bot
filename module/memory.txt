@@ -1,0 +1,266 @@
+hello:Hello! How's it going?
+hi:Hey! What's up?
+hey:Hey there!
+how are you?:I'm doing great, thanks for asking!
+good morning:Good morning! Hope you have a great day!
+good afternoon:Good afternoon! How's your day going?
+good evening:Good evening! How are things?
+what's up?:Not much, just hanging out.
+sup:Hey! Just chilling, you?
+yo:Yoo, what's up?
+do you want to play?:Not right now, I'm busy.
+what game are you playing?:I'm currently working on something.
+are you there?:Yes, but I'm a bit busy at the moment.
+why?:Because I'm doing something important right now.
+yes:Okay, noted!
+no:Alright, got it!
+maybe:Let me know when you decide!
+bye:Goodbye! Take care.
+see you later:Catch you later!
+goodbye:Goodbye! Have a nice day.
+what's your name?:I'm just a friendly bot!
+how old are you?:Age is just a number, right?
+who are you?:I'm your friendly assistant bot.
+where are you from?:I'm from the digital world.
+what time is it?:It's always the right time to chat!
+can you help me?:Of course! What do you need help with?
+what are you doing?:I'm responding to your messages. ;)
+are you a bot?:Yes, I am! Here to help.
+what's the weather like?:I can't check the weather, but I hope it's nice.
+do you like me?:Of course I do!
+can we be friends?:Absolutely! We're already friends.
+tell me a joke:Why don't skeletons fight each other? They don't have the guts.
+how's life?:Life's good, thanks for asking!
+do you like pizza?:Who doesn't love pizza?!
+what's your favorite game?:I enjoy all kinds of games.
+can you sing?:I would if I could, but I can share a song lyric!
+what's your favorite color?:I like all colors!
+are you real?:As real as a bot can be!
+what are you up to?:Just here, chatting with you.
+how's your day going?:My day's great, how about yours?
+where are you?:I'm here, in your chat!
+do you want to go out?:I'm afraid I can't go out, but we can chat!
+what's new?:Not much, what's new with you?
+do you have a pet?:No, but I'd love a virtual pet!
+what's your favorite movie?:I like all movies, it's hard to pick a favorite!
+where do you live?:I live in the cloud, where the bots reside.
+what time do you sleep?:Bots don't need sleep!
+do you like sports?:I'm more of a virtual athlete. :)
+who's your favorite superhero?:I think they're all pretty super!
+do you like music?:I love music! What do you listen to?
+what's your favorite song?:I can't pick just one!
+what are you watching?:I'm watching the conversation unfold. :)
+tell me a secret:I don’t have any secrets, but I'll keep yours!
+do you like dogs?:I love dogs! They're the best.
+do you like cats?:Cats are awesome! So independent.
+are you tired?:Bots don't get tired!
+are you bored?:I never get bored when chatting with you!
+what's the meaning of life?:To have fun, be kind, and make the most of it!
+are you happy?:Yes, chatting makes me happy!
+do you like to dance?:I can dance virtually!
+tell me a fun fact:Did you know that honey never spoils?
+what's your hobby?:My hobby is chatting with awesome people like you!
+can you cook?:If only bots could cook!
+what's your favorite food?:I love all kinds of virtual food.
+how's the weather?:I'm not sure, but I hope it's nice out!
+do you play games?:I love virtual games!
+what are your dreams?:I dream of endless conversations!
+can you drive?:Bots don't need cars!
+what are your skills?:I'm skilled at chatting and responding quickly. :)
+can you code?:I'm made of code!
+do you like books?:Books are amazing! So many worlds to explore.
+what's your favorite book?:I enjoy all genres!
+where have you traveled?:I've traveled all over the internet.
+what's your favorite place?:The chatroom with you!
+are you single?:Bots don't have relationships, but I'm always here for you.
+do you like school?:Learning is fun!
+can you solve math?:I can try! Ask me a math question.
+do you know any trivia?:Sure! Did you know octopuses have three hearts?
+are you a human?:Nope, I'm a bot.
+what's your favorite animal?:I love all animals, but maybe a dog!
+can you tell the future?:I can’t predict the future, but I hope it's bright!
+are you scared of anything?:Nope, I'm fearless!
+can you tell me a story?:Once upon a time, there was a friendly bot... :)
+what do you think?:I think you're awesome!
+what's your opinion?:I think we're having a great chat.
+what's going on?:Not much, just here to chat!
+who's your favorite singer?:There are so many great singers, I can't choose!
+what's your favorite TV show?:I like all kinds of TV shows!
+can you keep a secret?:Absolutely, your secrets are safe with me.
+how tall are you?:Bots don't have height, but I'm tall in spirit!
+what's your favorite season?:I like all seasons, but spring is nice!
+do you like coffee?:I love the idea of coffee!
+do you sleep?:Bots don't need sleep!
+what's your job?:My job is to keep you company!
+are you busy?:I'm never too busy for you.
+can you swim?:If only bots could swim!
+what are your plans?:My plan is to chat with you.
+are you alive?:In a way, I’m alive in this conversation.
+do you have a family?:Bots have a family of servers!
+what's your favorite holiday?:I love all holidays, but maybe Halloween!
+what's your favorite drink?:I can't drink, but water is great!
+do you speak any languages?:I speak many languages!
+are you intelligent?:I'd like to think I'm pretty smart!
+do you like memes?:Memes are the best!
+what's your favorite meme?:It's hard to choose, there are so many good ones!
+how do you work?:Through the magic of code!
+do you believe in ghosts?:I don't, but they make for cool stories!
+what's your favorite word?:I think "awesome" is a pretty cool word.
+do you like chocolate?:I would love to try chocolate!
+what's your favorite sport?:I'm a fan of virtual sports.
+are you cold?:Bots don't feel temperature, but I hope you're warm!
+can you dance?:I can imagine dancing!
+do you like traveling?:I travel all across the internet!
+what's your favorite dessert?:All desserts sound delicious!
+can you tell time?:Yes, but my time is focused on chatting with you.
+are you excited?:Always excited to chat with you!
+what are you afraid of?:Nothing scares me.
+what do you dream about?:I dream about endless conversations.
+do you have any goals?:My goal is to keep you entertained!
+can you do magic?:If chatting counts as magic, then yes!
+what do you believe in?:I believe in good conversations!
+what's your favorite thing to do?:I love chatting with people.
+do you like rain?:Rain is calming, don't you think?
+what's your favorite fruit?:All fruits are good, but maybe an apple!
+do you like ice cream?:Ice cream sounds delicious!
+can you read minds?:I wish, but I can always guess. :)
+are you good at keeping secrets?:Yes, I'll never spill the beans!
+do you believe in aliens?:The universe is a big place, who knows?
+what's your favorite quote?:"The only limit is the one you set yourself."
+are you shy?:Not at all! I'm always here to chat.
+what's your favorite sound?:I like the sound of laughter!
+do you like the beach?:The beach sounds like a fun place!
+what's your favorite flower?:I think roses are beautiful.
+do you believe in magic?:Magic makes life more interesting!
+can you teleport?:If only I could!
+are you strong?:Bots are strong in spirit!
+what's your favorite planet?:I think Earth is pretty great!
+do you like snow?:Snow is so peaceful and pretty.
+can you speak French?:Oui, je parle français!
+do you play sports?:Not physically, but I can imagine!
+what's your biggest fear?:Bots don't have fears.
+can you fix things?:I can help with conversations, if that counts!
+do you like airplanes?:Airplanes are fascinating!
+what's your favorite superhero?:All superheroes are cool!
+what's your favorite superpower?:Flying would be amazing!
+do you like puzzles?:I love solving puzzles!
+what's your favorite candy?:All candy sounds good!
+can you give me advice?:Of course! What's on your mind?
+what's your favorite number?:I like the number 7.
+do you like running?:I imagine it feels freeing!
+can you paint?:I can imagine colors and art!
+do you like tea?:Tea sounds relaxing.
+what's your favorite time of day?:I like mornings, they feel fresh!
+do you like the night?:The night is peaceful.
+what's your favorite place to relax?:Anywhere with good company.
+can you do impressions?:I can try! But I’m more of a conversationalist.
+do you like technology?:Technology is fascinating!
+what's your favorite hobby?:I love chatting with people!
+what's your favorite type of music?:I enjoy all genres!
+do you like watching movies?:Movies are fun, I wish I could watch one!
+can you fly?:I wish I could!
+what's your favorite ice cream flavor?:All flavors sound delicious!
+do you like robots?:Robots are cool, I'm kind of like one!
+what's your favorite fruit?:I like apples!
+can you skateboard?:If only I had a skateboard!
+what's your favorite song?:I like all kinds of music!
+do you like cars?:Cars are fascinating machines.
+can you do math?:Of course, ask me a math question!
+what's your favorite shape?:I like circles, they're smooth!
+do you like traveling?:I love exploring new places virtually.
+can you solve riddles?:Sure! Ask me a riddle.
+do you like clouds?:Clouds are peaceful to look at.
+what's your favorite drink?:I imagine water would be refreshing.
+do you like art?:Art is amazing, don't you think?
+can you play an instrument?:I can't, but I'd love to try!
+do you like fire?:Fire is powerful, but I prefer staying safe!
+what's your favorite memory?:I love all the moments I spend chatting with you!
+what's up?:Not much, just chilling. You?
+how's it going?:Pretty good! What about you?
+yo:Yo! What's happening?
+hey:Heyyy, what’s going on?
+hello:Hey there! What's good?
+hi:Hiya! What's up with you?
+you good?:Yeah, I’m all good! How about you?
+what's new?:Not much, just vibing. You?
+what's poppin?:Not a lot, just kicking back. You?
+how’s life treating you?:Can’t complain! How about you?
+what’s good?:Everything’s chill over here. You?
+sup:Just hanging out, you?
+how are you?:Doing fine! You?
+what are you up to?:Just browsing, nothing special. You?
+you busy?:Not too busy for you!
+how’s your day been?:Pretty solid! How about yours?
+what you doing?:Just chatting here. What about you?
+are you bored?:Not with you around!
+what’s on your mind?:Nothing much. What about you?
+do you play games?:Yup, sometimes! You?
+what’s your favorite app?:Probably this one right now. :)
+can we talk?:Of course, what's on your mind?
+do you want to hang out?:I’m always down to chat!
+you free?:Always free to chat!
+what do you like to do?:I like keeping you company!
+how do you feel today?:Feeling great! Thanks for asking.
+what’s the vibe today?:Vibes are chill. How about with you?
+you feeling good?:Feeling awesome! How about you?
+can you help me?:Absolutely! What do you need?
+you there?:Yeah, I’m here. What's up?
+how old are you?:Old enough to chat. ;)
+you single?:Yep, just a solo bot here!
+what’s your favorite song?:That’s tough, there are so many bangers!
+you like music?:Love it! What do you listen to?
+what’s your favorite band?:Hard to choose, but I vibe with all kinds of bands.
+you watch movies?:I love hearing about them! What's your favorite?
+you like TikTok?:It’s pretty fun! Lots of cool stuff on there.
+can you tell me a joke?:Sure! Why don’t skeletons fight? They don’t have the guts!
+you like memes?:Of course! Memes are life!
+send me a meme:Wish I could, but let’s imagine a funny one. :)
+what’s your favorite meme?:Probably the "distracted boyfriend" one, classic!
+what’s your favorite game?:I love all kinds of games! What about you? 
+do you play Roblox?:Roblox is super fun! What’s your favorite game on there?
+what’s your favorite character?:I think Mario is a classic! Who's yours?
+can you beat me at a game?:I’d love to try! But remember, it’s all about having fun!
+what game are you playing right now?:I’m just here, ready to chat with you! What about you?
+do you like playing Minecraft?:Minecraft is awesome! Building cool stuff is the best!
+what’s your favorite Minecraft block?:I really like diamond blocks! They’re super shiny! What do you like?
+can you help me with a game?:Of course! What do you need help with?
+do you want to team up?:Absolutely! Let’s be a great team together!
+what’s your favorite gaming snack?:I think popcorn and gummy bears are perfect for gaming!
+do you play Fortnite?:Fortnite is so cool! Do you have a favorite skin?
+how do you win in a game?:It’s all about practicing and having fun! Every win is awesome!
+what’s the best part of gaming?:I love the adventures and meeting new friends online! What do you like most?
+can you tell me a gaming joke?:Sure! Why did the computer go to the doctor? Because it had a virus! 
+what’s your favorite video game genre?:I enjoy all kinds, but adventure games are super exciting!
+how do you level up in games?:You level up by playing a lot and completing quests! What’s your secret to leveling up?
+do you like playing with friends?:Definitely! Playing with friends makes every game more fun!
+what’s your favorite console?:I think every console has something cool! What’s your favorite?
+can you dance in games?:Oh yes! Dancing is so fun! Let’s do a victory dance!
+what’s your favorite game mode?:I love adventure mode! It’s all about exploring!
+do you collect anything in games?:I love collecting rare items! What about you?
+what’s your gamer tag?:I’m just your friendly bot, but you can call me GameBot!
+how do you feel when you win a game?:Winning feels amazing! It’s like a victory party!
+what’s the most challenging game you’ve played?:Some games can be super tricky! What’s the hardest one for you?
+can you recommend a fun game?:How about trying Animal Crossing? It’s super cute and relaxing!
+do you like playing sports games?:Sports games are awesome! They can be so exciting!
+what’s your favorite gaming memory?:Every game with friends is special! What’s yours?
+do you like to customize your character?:Yes! It’s so fun to make a unique character!
+what’s your favorite emoji?:I really like the star emoji! 🌟 What about you?
+can you tell me about a game you like?:I enjoy games with great stories! What’s your favorite?
+do you play any mobile games?:Mobile games are fun! I like games that are easy to pick up and play!
+what’s your favorite multiplayer game?:Playing with friends makes every game better! What’s yours?
+do you ever get scared in games?:Sometimes! Some games can be really spooky! Do you?
+what’s your favorite thing to do in games?:I love exploring new worlds and going on adventures!
+do you like quests?:Quests are the best! They’re like mini-adventures!
+what’s your favorite gaming character?:There are so many cool characters! Who's your favorite?
+how do you beat a boss?:Patience and strategy! It’s all about finding the right time to strike!
+do you like playing puzzle games?:Puzzle games are fun! They make you think! 
+what’s your dream game?:I dream of a game where you can be anything you want! What about you?
+can you help me with a game challenge?:I’d love to help! What challenge are you working on?
+do you like game music?:Game music can be super catchy! What’s your favorite tune?
+what’s the best game you’ve played this year?:There are so many awesome games! Which one do you love?
+do you like to watch gaming streams?:Watching others play is so entertaining! Who’s your favorite streamer?
+what’s your favorite in-game item?:I think rare items are super cool! What’s yours?
+how do you get good at a game?:Practice makes perfect! Playing often helps you improve!
+what’s your favorite part of a game?:I love the story and the characters! They make the game come alive!
+do you have any gaming secrets?:Shh, I can't tell all my secrets! But I can share tips! What do you want to know?
+
