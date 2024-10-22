@@ -19,7 +19,6 @@ call npm install fs
 call npm install readline
 call npm install readline-sync
 call npm install axios
-call npm install crypto
 call npm install express body-parser
 call npm install natural
 call npm install string-similarity
