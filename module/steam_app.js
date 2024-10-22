@@ -37,11 +37,11 @@ const settings = {
     games_id: [], // no need to change
     proceedWithBannedAccount: false, //to proceed with bans
     playSoundOnNewItem: true, //turn sound on
-    version: 'v1.5.7'
+    version: 'v1.5.8'
 };
 
 /**********************************************************************************************
-    UTILITY FUNCTIONS
+    WELCOME
 ***********************************************************************************************/
 
     function printHeader() {
@@ -60,7 +60,7 @@ const settings = {
     // Display the header
         console.log(headerText);
         console.log(chalk.black.bold.bgWhite("    Inicialization    "));
-        load(chalk.yellow.bold('Loading Modules...'));
+        //load(chalk.yellow.bold('Loading Modules...'));
     }
 
 
@@ -69,48 +69,9 @@ const settings = {
     console.log(chalk.gray.underline("                   " + settings.version));
     //console.log(chalk.black.bold.bgWhite("      Steam Login        "));        
 
-    const ENCRYPTION_KEY = crypto.randomBytes(32); // Must be 256 bytes (32 characters)
-    const IV_LENGTH = 16; // For AES, this is always 16
-
-    // encryptor
-    function encrypt(text) {
-        let iv = crypto.randomBytes(IV_LENGTH);
-        let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
-        let encrypted = cipher.update(text);
-        encrypted = Buffer.concat([encrypted, cipher.final()]);
-        return iv.toString('hex') + ':' + encrypted.toString('hex');
-    }
-    //decryptor
-    function decrypt(text) {
-        let textParts = text.split(':');
-        let iv = Buffer.from(textParts.shift(), 'hex');
-        let encryptedText = Buffer.from(textParts.join(':'), 'hex');
-        let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
-        let decrypted = decipher.update(encryptedText);
-        decrypted = Buffer.concat([decrypted, decipher.final()]);
-        return decrypted.toString();
-    }
-
-
-    // Function to get input from user
-    function getInput() {
-        
-        printHeader();        
-        
-        tips(chalk.yellow("Choose your games like 730, 440, 441. Always use Comma to separate."));
-        let gamesid = readlineSync.question(chalk.gray.bold(" Games-ID") + ": ");
-        let username = readlineSync.question(chalk.gray.bold(" Username ") + ": ");
-        let password = readlineSync.question(chalk.gray.bold(" Password ") + ": ", { hideEchoBack: true });
-        let hasTwoFactorCode = readlineSync.keyInYNStrict(chalk.gray.bold(" Do you have SteamGuard? ") + ": ");
-        tips(chalk.yellow("Use Y to set Online or N to set Invisible."));
-        let appearOnline = readlineSync.keyInYNStrict(chalk.gray.bold(" Do you want to appear ONLINE? ") + ": "); // New input
-
-        // Encrypt username and password
-        let encryptedUsername = encrypt(username);
-        let encryptedPassword = encrypt(password);
-
-        return { gamesid, username: encryptedUsername, password: encryptedPassword, hasTwoFactorCode, appearOnline };
-    }
+/**********************************************************************************************
+    LOGS FUNCTIONS
+***********************************************************************************************/
 
     // Function to shuffle and count games
     function CountGamesUsed(gamesArray) {
@@ -125,10 +86,6 @@ const settings = {
     function parseInput(input) {
         return input.split(",").map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
     }
-
-/**********************************************************************************************
-    LOGS FUNCTIONS
-***********************************************************************************************/
 
     // Configuration object
     const config = {
@@ -164,7 +121,11 @@ const settings = {
         if (!config.logLevels.includes(type)) return;
 
         const timestamp = new Date().toLocaleTimeString();
-        const logMessage = `${timestamp} - [${type}] ${message}\n`;
+        if (type === 'TIP') {
+            logMessage = `[${type}] ${message}\n`; // Assign value if type is TIP
+        } else {
+            logMessage = `${timestamp} - [${type}] ${message}\n`; // Assign value for other types
+        }
         const logFilePath = path.join(config.logDir, config.logFileName);
 
         // Rotate logs if needed
@@ -172,7 +133,7 @@ const settings = {
 
         // Write the log message asynchronously
         fs.appendFile(logFilePath, logMessage, (err) => {
-            if (err) console.error(`Failed to write log: ${err.message}`);
+            if (err) error(chalk.red(`Failed to write log: ${err.message}`)); 
         });
 
         // Still log to the console
@@ -211,6 +172,29 @@ const settings = {
     UTILITY2 FUNCTIONS
 ***********************************************************************************************/
 
+    function encrypt(text, password) {
+        const iv = crypto.randomBytes(16); // Initialization vector
+        const key = crypto.createHash('sha256').update(password).digest(); // Create a 256-bit key
+
+        const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+        let encrypted = cipher.update(text, 'utf8', 'hex');
+        encrypted += cipher.final('hex');
+
+        // Combine iv and encrypted text for storage
+        return iv.toString('hex') + ':' + encrypted;
+    }
+
+    function decrypt(encryptedData, password) {
+        const [ivHex, encryptedText] = encryptedData.split(':');
+        const iv = Buffer.from(ivHex, 'hex');
+        const key = crypto.createHash('sha256').update(password).digest();
+
+        const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+        let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+        decrypted += decipher.final('utf8');
+
+        return decrypted;
+    }
 
     // Function for shutting down the bot
     async function shutdown(signalOrCode = 0) {
@@ -265,7 +249,11 @@ let startTime = Date.now(); // Track when the bot started
     // Function to display playtimes
     async function AppGameIDPlayTime() {
         const now = Date.now();
-
+        
+        if (loadedCredentials) {
+            settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim()); // Split into array
+        }           
+        
         for (const gameId of settings.games_id) {
             
             // Check if gameId is null or undefined
@@ -310,54 +298,171 @@ let startTime = Date.now(); // Track when the bot started
 setInterval(AppGameIDPlayTime, 3600000);
 
 /**********************************************************************************************
-    LOGIN SYSTEM & LOGGED
+    LOGIN SYSTEM
 ***********************************************************************************************/
 
-    // Log in to Steam
-const { gamesid, username, password, hasTwoFactorCode, appearOnline } = getInput(); // Include appearOnline in the returned values
-settings.games_id = parseInput(gamesid);
-settings.appearOnline = appearOnline; // Save the user's preference
+// Function to get input from user
+function getInput() {
+    printHeader();
+    tips(chalk.yellow("Choose the games by adding the codes like: 730, 440..."));
 
-    async function login() {
-        let retries = 0;
-        const maxRetries = 3;
-        const delayBetweenRetries = 3000; // milliseconds
+    let gamesid = readlineSync.question(chalk.gray.bold(" GameID") + ": ");
+    let username = readlineSync.question(chalk.gray.bold(" Username ") + ": ");
+    let password = readlineSync.question(chalk.gray.bold(" Password ") + ": ", { hideEchoBack: true });
+    let hasTwoFactorCode = readlineSync.keyInYNStrict(chalk.gray.bold(" Do you have SteamGuard? "));
+    let appearOnline = readlineSync.keyInYNStrict(chalk.gray.bold(" Do you want to appear ONLINE? "));
 
-        // Decrypt the username and password
-        let decryptedUsername = decrypt(username);
-        let decryptedPassword = decrypt(password);
+    // Ask the user if they want to encrypt their credentials
+    let encryptCredentials = readlineSync.keyInYNStrict(chalk.yellow(" Do you want to encrypt your credentials? (Recommended) "));
 
-        while (retries < maxRetries) {
+    let masterPassword = null;
+
+    if (encryptCredentials) {
+        // Ask for master password to encrypt credentials
+        masterPassword = readlineSync.question(chalk.gray.bold(" Enter a master password to encrypt your credentials ") + ": ", { hideEchoBack: true });
+    } else {
+        // Display warning about storing credentials in plaintext
+        console.warn(chalk.red.bold("Warning: Storing credentials in plaintext is insecure and not recommended."));
+    }
+
+    // Save credentials to file
+    saveCredentials({ gamesid, username, password, hasTwoFactorCode, appearOnline }, encryptCredentials, masterPassword);
+
+    return { gamesid, username, password, hasTwoFactorCode, appearOnline, encryptCredentials, masterPassword };
+}
+
+// Function to save credentials to a file
+function saveCredentials(credentials, encryptCredentials, masterPassword) {
+    let storedCredentials = {
+        gamesid: credentials.gamesid,
+        hasTwoFactorCode: credentials.hasTwoFactorCode,
+        appearOnline: credentials.appearOnline,
+        encryptCredentials: encryptCredentials // Store this flag to know how to handle decryption
+    };
+
+    if (encryptCredentials) {
+        // Encrypt username and password
+        const encryptedUsername = encrypt(credentials.username, masterPassword);
+        const encryptedPassword = encrypt(credentials.password, masterPassword);
+
+        storedCredentials.username = encryptedUsername;
+        storedCredentials.password = encryptedPassword;
+    } else {
+        // Store credentials in plaintext (Not recommended)
+        storedCredentials.username = credentials.username;
+        storedCredentials.password = credentials.password;
+    }
+
+    fs.writeFileSync('module/credentials.txt', JSON.stringify(storedCredentials), { flag: 'w' });
+}
+
+// Function to load and decrypt credentials from a file
+function loadCredentials() {
+    if (fs.existsSync('module/credentials.txt')) {
+        const data = fs.readFileSync('module/credentials.txt', 'utf-8');
+        const storedCredentials = JSON.parse(data);
+
+        if (storedCredentials.encryptCredentials) {
+            // Ask for master password to decrypt credentials
+            let masterPassword = readlineSync.question(chalk.gray.bold(" Enter your master password to decrypt your credentials ") + ": ", { hideEchoBack: true });
+
             try {
-                if (hasTwoFactorCode) {
-                    const mobileCode = readlineSync.question(chalk.gray.bold(" SteamGuard Code ") + ": ", { hideEchoBack: true });
-                    client.logOn({ accountName: decryptedUsername, password: decryptedPassword, twoFactorCode: mobileCode });
-                } else {
-                    client.logOn({ accountName: decryptedUsername, password: decryptedPassword });
-                }
-                break; // If login is successful, break out of the loop
-            } catch (e) {
-                if (e.eresult === SteamUserReserved.EResult.AccountLogonDenied) {
-                    log(chalk.red("Wrong, Please insert your SteamGuard code again:"));
-                } else {
-                    throw e; // Handle other errors normally
-                }
-                retries++;
-                if (retries < maxRetries) {
-                    await new Promise(res => setTimeout(res, delayBetweenRetries)); // Wait before retrying
-                }
-            }
-        }
+                // Decrypt the username and password
+                const decryptedUsername = decrypt(storedCredentials.username, masterPassword);
+                const decryptedPassword = decrypt(storedCredentials.password, masterPassword);
 
-        if (retries >= maxRetries) {
-            error(chalk.red("Maximum login retries exceeded."));
-            shutdown();
+                return {
+                    gamesid: storedCredentials.gamesid,
+                    username: decryptedUsername,
+                    password: decryptedPassword,
+                    hasTwoFactorCode: storedCredentials.hasTwoFactorCode,
+                    appearOnline: storedCredentials.appearOnline,
+                    masterPassword, // Save for later use
+                    encryptCredentials: true
+                };
+            } catch (error) {
+                console.error(chalk.red("Failed to decrypt credentials. Please check your master password."));
+                return null; // Indicate failure to load credentials
+            }
+        } else {
+            // Credentials are stored in plaintext
+            console.warn(chalk.red.bold("Warning: Your credentials are stored in plaintext. It is strongly recommended to encrypt them."));
+            return {
+                gamesid: storedCredentials.gamesid,
+                username: storedCredentials.username,
+                password: storedCredentials.password,
+                hasTwoFactorCode: storedCredentials.hasTwoFactorCode,
+                appearOnline: storedCredentials.appearOnline,
+                encryptCredentials: false
+            };
+        }
+    }
+    return null; // No credentials found
+}
+
+// Load credentials at the start of the application
+let loadedCredentials = loadCredentials();
+
+if (loadedCredentials) {
+    printHeader();
+    log(chalk.green("OneTime Login [" + loadedCredentials.username + "] started successfully."));
+
+    // Update settings based on loaded credentials
+    settings.appearOnline = loadedCredentials.appearOnline;
+    settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim());
+} else {
+    loadedCredentials = getInput();
+}
+
+// Log in to Steam
+async function login() {
+    let retries = 0;
+    const maxRetries = 3;
+    const delayBetweenRetries = 3000; // milliseconds
+
+    // Load and decrypt the username and password
+    const { username, password, hasTwoFactorCode } = loadedCredentials;
+
+    while (retries < maxRetries) {
+        try {
+            if (hasTwoFactorCode) {
+                const mobileCode = readlineSync.question(chalk.gray.bold(" SteamGuard Code ") + ": ", { hideEchoBack: true });
+                client.logOn({ accountName: username, password, twoFactorCode: mobileCode });
+            } else {
+                client.logOn({ accountName: username, password });
+            }
+        } catch (e) {
+            if (e.eresult === SteamUserReserved.EResult.AccountLogonDenied) {
+                log(chalk.red("Wrong, Please insert your SteamGuard code again:"));
+            } else {
+                throw e; // Handle other errors normally
+            }
+            retries++;
+            if (retries < maxRetries) {
+                await new Promise(res => setTimeout(res, delayBetweenRetries)); // Wait before retrying
+            }
         }
     }
 
+    if (retries >= maxRetries) {
+        error(chalk.red("Maximum login retries exceeded."));
+        shutdown();
+    }
+}
+
 login();
 
+/**********************************************************************************************
+    LOGGED SYSTEM
+***********************************************************************************************/
+
 client.on("loggedOn", () => {
+
+    const { username, password, appearOnline, gamesid } = loadedCredentials;
+    
+    if (loadedCredentials) {
+        settings.games_id = loadedCredentials.gamesid.split(',').map(gameId => gameId.trim()); // Split into array
+    }   
     
     //set friendchat mode.
     if (settings.appearOnline) {
@@ -369,7 +474,6 @@ client.on("loggedOn", () => {
         client.setPersona(SteamUserReserved.EPersonaState.Invisible); // Set to INVISIBLE
         log(chalk.red("Set Invisible."));
     }
-    
     
     //checks login issues during connection
     if (username === "" || password === "") {

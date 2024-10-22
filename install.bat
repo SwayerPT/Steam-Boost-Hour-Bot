@@ -17,6 +17,7 @@ call npm install steam-user
 call npm install steamcommunity
 call npm install fs
 call npm install readline
+call npm install readline-sync
 call npm install axios
 call npm install crypto
 call npm install express body-parser
