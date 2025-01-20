@@ -23,9 +23,8 @@ Despite acknowledging that credentials are not encrypted, the maintainer continu
 ---
 
 ## ✅ Why This Fork Is Secure:
-- **Credentials are encrypted**, ensuring the safety of your Steam account.
+- **Credentials are encrypted** using a user generated password.
 - Resolved the security flaws ignored in the original version.
-- Transparent about risks and encourages responsible use.
 
 ---
 
