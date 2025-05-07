@@ -4,11 +4,11 @@
   Steam Boost Hour [Bot]
 </h1>
 
-## ⚠️ WARNING: DO NOT USE THE ORIGINAL VERSION
+## ⚠️ AVOID THE ORIGINAL REPOSITORY; USE THIS SECURE FORK INSTEAD
 
-This repository is a secure fork of the original [Steam-Boost-Hour-Bot](https://github.com/SwayerPT/Steam-Boost-Hour-Bot) by [SwayerPT](https://github.com/SwayerPT).  
+This is a secure and improved fork of the [Steam-Boost-Hour-Bot](https://github.com/SwayerPT/Steam-Boost-Hour-Bot) by [SwayerPT](https://github.com/SwayerPT).  
 
-The original repository has **serious security flaws** and **misleads users by falsely claiming that credentials are encrypted**. As of now, the original README **still claims that the bot encrypts credentials**, which is untrue. In reality, your Steam username and password are stored in plain text, putting your account at risk.
+The **original version has serious security issues**, including storing your Steam credentials in plain text while falsely claiming they are encrypted. This fork fixes those flaws and prioritises your account safety.
 
 ### My Attempts to Address the Issue:
 - I raised two issues in the original repository to notify the maintainer about the security risk.
