@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center"><br>Steam Boost Hour [Bot] NodeJS - Community</br>
-Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Releases</a>
+Download the latest version on <a href='https://github.com/SwayerPT/Steam-Hour-Bot/releases'>Releases (DEV OFFLINE)</a>
 </br>
 🚀 Steam Hour Bot is a NodeJS-based application designed to automate playtime tracking on Steam. The bot logs into your Steam account and simulates playing games, helping you boost your in-game hours without actively playing.
 <br/>⚠️ Disclaimer: The author is not responsible for any misuse of this code. Please use responsibly and adhere to Steam's terms of service.
